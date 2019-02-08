@@ -1,0 +1,100 @@
+/* pages/index/index2.wxss */
+.userView{
+  background-color:red;
+  width: 100%;
+  height: 300rpx;
+}
+.userinfoView{
+  background-color: blue;
+  width: 27%;
+  height: 300rpx;
+  float: left;
+}
+.userAvatarView{
+  background-color:yellow;
+  width: 100%;
+  height: 120rpx;
+  padding-top: 30rpx;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+}
+.userAvatar{
+  background-color:yellow;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  box-shadow: 0 0 20rpx white;
+}
+.userNicknameView{
+  background-color:skyblue;
+  width: 100%;
+  height: 40rpx;
+  line-height: 30rpx;
+  text-align: center;
+  margin-top: 15rpx;
+}
+.userNickname{
+  font-size: 25rpx;
+}
+.studentInfoView{
+  background-color: aqua;
+  height: 300rpx;
+  width: 73%;
+  float: left;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.bindView{
+  background-color: chocolate;
+  height:280rpx;
+  width: 100%;
+  border-radius: 10rpx; 
+  box-shadow: 0 0 10rpx gray;
+}
+.bindView .title{
+  width: 100%;
+  height: 35rpx;
+  display: flex;
+  justify-content: center;
+  font-size: 27rpx;
+  margin-top: 10rpx;
+  line-height: 35rpx;
+}
+.StudentIdInputView{
+  background-color: violet;
+  margin-top: 10rpx;
+  width: 90%;
+  margin-left: 5%;
+  border-bottom: solid 2rpx gainsboro;
+}
+.StudentIdInputView .StudentIdInput,.StudentPasswordInput{
+  font-size: 27rpx;
+}
+.StudentPasswordInputView{
+  background-color: violet;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 20rpx;
+  border-bottom: solid 2rpx gainsboro;
+}
+.noticeView{
+  background-color: pink;
+  height: 60rpx;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 5rpx;
+  border-radius: 10rpx;
+}
+.iconView{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rebeccapurple;
+  width: 60rpx;
+  height: 60rpx;
+  float: left;
+}
+.contentView{
+  float:left;
+}

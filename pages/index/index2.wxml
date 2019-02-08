@@ -1,0 +1,31 @@
+<view class="userView">
+<view class='userinfoView'>
+  <view class="userAvatarView">
+    <image class="userAvatar" src="{{userInfo.avatarUrl}}" mode="scaleToFill"></image>
+  </view>
+  <view class="userNicknameView">
+    <text  class="userNickname">陈国俊</text>
+  </view>
+</view>
+<view class='studentInfoView'>
+  <view class='bindView'>
+    <view class='title'>
+      教务系统账号
+    </view>
+    <view class='StudentIdInputView'>
+      <input class='StudentIdInput' placeholder='学号'></input>
+    </view>
+    <view class='StudentPasswordInputView'>
+      <input class='StudentPasswordInput' password='true' placeholder='教务系统密码'></input>
+    </view>
+  </view>
+</view>
+</view>
+<view class='noticeView'>
+  <view class='iconView'>
+    <icon type='info' size='40rpx'></icon>
+  </view>
+  <view class='contentView'>
+    <text>123123213</text>
+  </view>
+</view>
