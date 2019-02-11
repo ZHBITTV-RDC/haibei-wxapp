@@ -1,32 +1,54 @@
-/* pages/index/index2.wxss */
+/* 分割线 */
+.line{
+  background-color: rgb(237, 237, 237);
+  width: 95%;
+  height: 1px;
+}
+.lineView{
+  width: 100%;
+  height: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 3px;
+}
+
+/* 分隔栏 */
+.blankLine{
+  background-color: rgb(245, 245, 245);
+  width: 100%;
+  height: 5px;
+}
+
+/* 学生信息栏 */
 .userView{
-  background-color:red;
+  /* background-color:red; */
   width: 100%;
   height: 300rpx;
 }
 .userinfoView{
-  background-color: blue;
+  /* background-color: blue; */
   width: 27%;
   height: 300rpx;
   float: left;
 }
 .userAvatarView{
-  background-color:yellow;
+  /* background-color:yellow; */
   width: 100%;
   height: 120rpx;
-  padding-top: 30rpx;
+  padding-top: 60rpx;
   padding-left: 40rpx;
   padding-right: 40rpx;
 }
 .userAvatar{
-  background-color:yellow;
+  /* background-color:yellow; */
   width: 120rpx;
   height: 120rpx;
   border-radius: 50%;
   box-shadow: 0 0 20rpx white;
 }
 .userNicknameView{
-  background-color:skyblue;
+  /* background-color:skyblue; */
   width: 100%;
   height: 40rpx;
   line-height: 30rpx;
@@ -37,16 +59,16 @@
   font-size: 25rpx;
 }
 .studentInfoView{
-  background-color: aqua;
+  /* background-color: aqua; */
   height: 300rpx;
-  width: 73%;
+  width: 70%;
   float: left;
   display:flex;
   justify-content:center;
   align-items:center;
 }
 .bindView{
-  background-color: chocolate;
+  /* background-color: chocolate; */
   height:280rpx;
   width: 100%;
   border-radius: 10rpx; 
@@ -60,9 +82,12 @@
   font-size: 27rpx;
   margin-top: 10rpx;
   line-height: 35rpx;
+  background-image: -webkit-gradient(linear, left 0, right 0, from(rgb(105,210,231)), to(rgb(135,254,229)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .StudentIdInputView{
-  background-color: violet;
+  /* background-color: violet; */
   margin-top: 10rpx;
   width: 90%;
   margin-left: 5%;
@@ -71,30 +96,87 @@
 .StudentIdInputView .StudentIdInput,.StudentPasswordInput{
   font-size: 27rpx;
 }
+.bindButton{
+  color: white;
+  font-size: 30rpx;
+  background: linear-gradient(to right,rgb(105,210,231),rgb(135,254,229));
+  border-radius: 10rpx;
+  width: 150rpx;
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .StudentPasswordInputView{
-  background-color: violet;
+  /* background-color: violet; */
   width: 90%;
   margin-left: 5%;
   margin-top: 20rpx;
   border-bottom: solid 2rpx gainsboro;
 }
 .noticeView{
-  background-color: pink;
+  /* background-color: pink; */
   height: 60rpx;
   width: 90%;
   margin-left: 5%;
   margin-top: 5rpx;
+  margin-bottom: 5rpx;
   border-radius: 10rpx;
 }
 .iconView{
+  /* background-color: rebeccapurple; */
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rebeccapurple;
   width: 60rpx;
   height: 60rpx;
   float: left;
 }
 .contentView{
   float:left;
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 60rpx;
+  font-size: 30rpx;
+}
+.functionView{
+  /* background-color: royalblue; */
+  width: 100%;
+  height: 600rpx;
+}
+.functionItemView{
+  /* background-color: rosybrown; */
+  width: 170rpx;
+  height: 170rpx;
+  float: left;
+  margin-left: 15rpx;
+  margin-top: 20rpx;
+}
+.functionIconView{
+  /* background-color: rebeccapurple; */
+  width: 170rpx;
+  height: 120rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.functionIcon{
+  width: 100rpx;
+  height: 100rpx;
+}
+.functionNameView{
+  /* background-color: palegreen; */
+  width: 170rpx;
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+}
+.bindButtonView{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25rpx;
 }

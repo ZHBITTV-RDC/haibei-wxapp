@@ -18,14 +18,91 @@
     <view class='StudentPasswordInputView'>
       <input class='StudentPasswordInput' password='true' placeholder='教务系统密码'></input>
     </view>
+    <view class='bindButtonView'>
+      <view class='bindButton' bindtap='bindStudent'>绑定</view>
+    </view>
   </view>
 </view>
 </view>
+
+<!-- 分割线 -->
+<view class='lineView'>
+  <view class='line'></view>
+</view>
+
 <view class='noticeView'>
   <view class='iconView'>
     <icon type='info' size='40rpx'></icon>
   </view>
   <view class='contentView'>
-    <text>123123213</text>
+    <text>你没有新消息哟~</text>
   </view>
 </view>
+<!-- 分隔栏 -->
+<view class='blankLine'></view>
+<scroll-view class='functionView' scroll-x='true' scroll-y='false'>
+  <view class='functionItemView'>
+    <view class='functionIconView'>
+      <image src='../../img/schedule.svg' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      课表
+    </view>
+  </view>
+  <view class='functionItemView'>
+    <view class='functionIconView'>
+      <image src='../../img/score.svg' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      课程成绩
+    </view>
+  </view>
+  <view class='functionItemView'>
+    <view class='functionIconView'>
+      <image src='../../img/photo.svg' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      照片
+    </view>
+  </view>
+  <view class='functionItemView'>
+    <view class='functionIconView'>
+      <image src='../../img/lecture.svg' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      讲座信息
+    </view>
+  </view>
+  <view class='functionItemView' bindtap='xiaoli'>
+    <view class='functionIconView'>
+      <image src='../../img/schedule.png' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      校历
+    </view>
+  </view>
+  <view class='functionItemView'>
+    <view class='functionIconView'>
+      <image src='../../img/schedule.png' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      四六级
+    </view>
+  </view>
+  <view class='functionItemView'>
+    <view class='functionIconView'>
+      <image src='../../img/schedule.png' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      课表
+    </view>
+  </view>
+  <view class='functionItemView'>
+    <view class='functionIconView'>
+      <image src='../../img/schedule.png' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      课表
+    </view>
+  </view>
+</scroll-view>

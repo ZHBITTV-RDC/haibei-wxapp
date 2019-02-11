@@ -9,6 +9,9 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   onLoad: function () {
+    wx.setNavigationBarTitle({
+      title: '北理珠微校园',
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -42,6 +45,16 @@ Page({
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
+    })
+  },
+  bindStudent: function(e){
+    wx.showLoading({
+      title: '正在绑定中...',
+    })
+  },
+  xiaoli: function(){
+    wx.navigateTo({
+      url: './schedule',
     })
   }
 })
