@@ -18,7 +18,7 @@
     </view>
 
     <view class='table_main'>
-      <view class='td' style='width:130rpx;background-color:white;'>
+      <view class='td' style='width:65px;background-color:white;'>
         <view class="cell_label centerclass">寒假</view>
       </view>
 

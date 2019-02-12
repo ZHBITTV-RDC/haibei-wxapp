@@ -41,7 +41,7 @@
 <!-- 分隔栏 -->
 <view class='blankLine'></view>
 <scroll-view class='functionView' scroll-x='true' scroll-y='false'>
-  <view class='functionItemView'>
+  <view class='functionItemView' bindtap='timetable'>
     <view class='functionIconView'>
       <image src='../../img/schedule.svg' class='functionIcon'></image>
     </view>
@@ -49,7 +49,7 @@
       课表
     </view>
   </view>
-  <view class='functionItemView'>
+  <view class='functionItemView' bindtap='score'>
     <view class='functionIconView'>
       <image src='../../img/score.svg' class='functionIcon'></image>
     </view>
@@ -65,7 +65,7 @@
       照片
     </view>
   </view>
-  <view class='functionItemView'>
+  <view class='functionItemView' bindtap='lecture'>
     <view class='functionIconView'>
       <image src='../../img/lecture.svg' class='functionIcon'></image>
     </view>
@@ -83,7 +83,7 @@
   </view>
   <view class='functionItemView'>
     <view class='functionIconView'>
-      <image src='../../img/schedule.png' class='functionIcon'></image>
+      <image src='../../img/46.svg' class='functionIcon'></image>
     </view>
     <view class='functionNameView'>
       四六级
@@ -91,18 +91,26 @@
   </view>
   <view class='functionItemView'>
     <view class='functionIconView'>
-      <image src='../../img/schedule.png' class='functionIcon'></image>
+      <image src='../../img/exam.svg' class='functionIcon'></image>
     </view>
     <view class='functionNameView'>
-      课表
+      考试安排
     </view>
   </view>
   <view class='functionItemView'>
     <view class='functionIconView'>
-      <image src='../../img/schedule.png' class='functionIcon'></image>
+      <image src='../../img/card.svg' class='functionIcon'></image>
     </view>
     <view class='functionNameView'>
-      课表
+      电子校园卡
+    </view>
+  </view>
+  <view class='functionItemView' bindtap='secondHand'>
+    <view class='functionIconView'>
+      <image src='../../img/ershou.svg' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      二手集市
     </view>
   </view>
 </scroll-view>

@@ -1,0 +1,31 @@
+<view class='lecture'>
+  <view class='lectureInfo'>
+    <view class='left'>
+      <view class='title'>
+        已听讲座列表
+      </view>
+    </view>
+    <view class='right'>
+      <view style='font-size: 30rpx;padding-top:30rpx;'>通过:{{hasPass}}场</view>
+    </view>
+  </view>
+
+  <!-- 分割线 -->
+  <view class='lineView'>
+    <view class='line'></view>
+  </view>
+  <view class='lectureView'>
+    <view class='lectureItem {{lectureItem.name.length>=12?"lectureLarge":"lectureSmall"}}' wx:for='{{lectureList}}' wx:for-item='lectureItem'>
+      <view class='lectureLeft'>
+        <view class='lectureName'>{{lectureItem.name}}</view>
+        <view class='lectureTime'>{{lectureItem.time}}</view>
+      </view>
+      <view class='lectureRight'>
+        <view class='lectureResult {{lectureItem.hasPass?"pass":"notPass"}}'>{{lectureItem.hasPass?"通过":"不通过"}}</view>
+      </view>
+      <view class='lineView' wx:if="{{index+1 < lectureList.length}}">
+        <view class='line'></view>
+      </view>
+    </view>
+  </view>
+</view>

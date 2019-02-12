@@ -1,24 +1,3 @@
-/* 分割线 */
-.line{
-  background-color: rgb(237, 237, 237);
-  width: 95%;
-  height: 1px;
-}
-.lineView{
-  width: 100%;
-  height: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 3px;
-}
-
-/* 分隔栏 */
-.blankLine{
-  background-color: rgb(245, 245, 245);
-  width: 100%;
-  height: 5px;
-}
 
 /* 学生信息栏 */
 .userView{

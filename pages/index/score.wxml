@@ -1,0 +1,39 @@
+<view class='score'>
+  <view class='scoreInfo'>
+    <view class='left'>
+      <view class='title'>
+        课程成绩
+      </view>
+      <picker value="{{index}}" range="{{semesterList}}" range-key="name">
+        <view class='semester'>
+          学期:{{semesterList[index].name}}
+        </view>
+      </picker>
+
+    </view>
+    <view class='right'>
+      绩点:2.82
+    </view>
+  </view>
+
+  <!-- 分割线 -->
+  <view class='lineView'>
+    <view class='line'></view>
+  </view>
+  <view class='scoreView'>
+    <view class='scoreItem' wx:for='{{scoreList}}' wx:for-item='scoreItem'>
+      <view class='scoreLeft'>
+        <view class='scoreName'>{{scoreItem.courseName}}</view>
+        <view class='scoreCredit'>学分:{{scoreItem.courseCredit}}</view>
+        <view class='scoreType'>{{scoreItem.courseType}}</view>
+      </view>
+      <view class='scoreRight'>
+        <view class='scoreResult' style='color:rgb(0, 204, 0);' wx:if='{{scoreItem.courseResult>=60 || scoreItem.courseResult=="中等" || scoreItem.courseResult=="优秀" || scoreItem.courseResult=="良好" || scoreItem.courseResult=="及格"}}'>{{scoreItem.courseResult}}</view>
+        <view class='scoreResult' style='color:rgb(255, 94, 0);' wx:if='{{scoreItem.courseResult<60 || scoreItem.courseResult=="不及格"}}'>{{scoreItem.courseResult}}</view>
+      </view>
+      <view class='lineView' wx:if="{{index+1 < scoreList.length}}">
+        <view class='line'></view>
+      </view>
+    </view>
+  </view>
+</view>

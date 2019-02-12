@@ -1,0 +1,26 @@
+<!--课程表-->
+<view class='settingButtonView' bindtap='showButton'>
+  <image src='../../img/setting.svg' class='setting'></image>
+</view>
+<view class='{{isShow?"show":"hide"}} settingView'>
+  <view class='settingItem' style='border-bottom:solid 1px rgb(211, 211, 211);'>选择学期:2018-2019学年第一学期</view>
+  <view class='settingItem' style='margin-top:10rpx;'>选择周次:第一周</view>
+</view>
+<scroll-view scroll-x scroll-y>
+  <view class='titleView'>
+    <view class='title' style='margin-left:30rpx;'>周一</view>
+    <view class='title'>周二</view>
+    <view class='title'>周三</view>
+    <view class='title'>周四</view>
+    <view class='title'>周五</view>
+    <view class='title'>周六</view>
+    <view class='title'>周日</view>
+  </view>
+  <view class='courseView' wx:for="{{courseList}}" wx:for-item="nowList">
+    <view class='time'>{{index+1}}-{{index+2}}</view>
+    <view class='courseItem' wx:for="{{nowList}}" wx:for-item="classItem">
+      <view class='courseName'>{{classItem.courseName}}</view>
+      <view class='courseLocation'>{{classItem.courseLocation}}</view>
+    </view>
+  </view>
+</scroll-view>

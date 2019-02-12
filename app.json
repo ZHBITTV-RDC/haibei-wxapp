@@ -1,9 +1,14 @@
 {
   "pages": [
     "pages/index/index2",
+    "pages/index/score",
     "pages/index/index",
+    "pages/index/timetable",
     "pages/logs/logs",
-    "pages/index/schedule"
+    "pages/index/schedule",
+    "pages/index/secondHand",
+    "pages/index/lecture",
+    "pages/index/46"
   ],
   "window": {
     "backgroundTextStyle": "light",

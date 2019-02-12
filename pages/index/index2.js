@@ -12,6 +12,10 @@ Page({
     wx.setNavigationBarTitle({
       title: '北理珠微校园',
     })
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#2da0fd',
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -55,6 +59,26 @@ Page({
   xiaoli: function(){
     wx.navigateTo({
       url: './schedule',
+    })
+  },
+  timetable: function(){
+    wx.navigateTo({
+      url: './timetable',
+    })
+  },
+  score: function(){
+    wx.navigateTo({
+      url: './score',
+    })
+  },
+  lecture: function(){
+    wx.navigateTo({
+      url: './lecture',
+    })
+  },
+  secondHand: function(){
+    wx.navigateTo({
+      url: './secondHand',
     })
   }
 })

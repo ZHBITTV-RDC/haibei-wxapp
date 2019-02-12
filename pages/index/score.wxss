@@ -1,0 +1,91 @@
+/* pages/index/score.wxss */
+page{
+  background-color: rgb(247, 247, 247);
+}
+.score{
+  background-color: white;
+  width: 90%;
+  border-radius: 5px;
+  margin: 5% 5%;
+  box-shadow: 0 0 20rpx rgb(231, 231, 231);
+}
+.title{
+  font-size: 30rpx;
+  padding-top: 30rpx;
+  margin-left: 30rpx;
+}
+.semester{
+  color: rgb(137,137,137);
+  font-size: 29rpx;
+  margin-left: 30rpx;
+  padding-bottom: 10rpx;
+}
+.scoreInfo{
+  width: 100%;
+  height: 120rpx;
+}
+.left{
+  width: 70%;
+  float: left;
+  height: 120rpx;
+}
+.right{
+  width: 30%;
+  float: left;
+  font-size: 30rpx;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 120rpx;
+}
+.scoreItem{
+  width: 100%;
+  height: 130rpx;
+}
+.scoreLeft{
+  width: 70%;
+  float: left;
+  height: 130rpx;
+}
+.scoreRight{
+  width: 30%;
+  float: left;
+  font-size: 30rpx;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 130rpx;
+}
+.scoreName{
+  margin-top: 20rpx;
+  margin-left: 40rpx;
+  font-size: 35rpx;
+}
+.scoreCredit{
+  background-color: skyblue;
+  border-radius: 5px;
+  color:white;
+  font-size: 25rpx;
+  margin-top: 10rpx;
+  margin-left: 40rpx;
+  width: 100rpx;
+  height: 40rpx;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  float: left;
+}
+.scoreType{
+  background-color: skyblue;
+  border-radius: 5px;
+  color:white;
+  font-size: 25rpx;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+  width: 150rpx;
+  height: 40rpx;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  float: left;
+}
