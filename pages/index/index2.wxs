@@ -1,0 +1,142 @@
+var sub = function (val) {
+  if (val.length == 0 || val == undefined) {
+    return;
+  }
+  if (val.length > 7) {
+    return val.substring(0, 7) + "...";
+  } else {
+    return val;
+  }
+}
+
+var sub2 = function (val) {
+  if (val.length == 0 || val == undefined) {
+    return;
+  }
+  if (val.length > 5) {
+    return val.substring(0, 5) + "...";
+  } else {
+    return val;
+  }
+}
+
+var sub3 = function (val) {
+  if (val.length == 0 || val == undefined) {
+    return;
+  }
+  if (val.length > 10) {
+    return val.substring(0, 10) + "...";
+  } else {
+    return val;
+  }
+}
+
+var getClassTime = function (course){
+  var timeList2 = {
+    "01": { start: "0800", end: "0845" },
+    "02": { start: "0850", end: "0935" },
+    "03": { start: "0955", end: "1040" },
+    "04": { start: "1045", end: "1130" },
+    "05": { start: "1140", end: "1225" },
+    "06": { start: "1230", end: "1315" },
+    "07": { start: "1400", end: "1445" },
+    "08": { start: "1450", end: "1535" },
+    "09": { start: "1555", end: "1640" },
+    "10": { start: "1645", end: "1730" },
+    "11": { start: "1840", end: "1925" },
+    "12": { start: "1930", end: "2015" },
+    "13": { start: "2025", end: "2110" },
+    "14": { start: "2115", end: "2200" },
+  }
+  var start = timeList2[sliceStr2(course.courseTime).start].start
+  var end = timeList2[sliceStr2(course.courseTime).end].end
+  return start.slice(0, 2) + ":" + start.slice(2, 4) + "-" + end.slice(0, 2) + ":" + end.slice(2, 4)
+}
+
+var getNowClass = function (list){
+  var now = getDate()
+  var todayClass = list[now.getDay() - 1]
+  var hour = now.getHours()
+  var minute = now.getMinutes()
+  var nowTime = [hour, minute].map(formatNumber).join('')
+  var timeList2 = {
+    "01":{ start: "0800", end: "0845" },
+    "02":{ start: "0850", end: "0935" },
+    "03":{ start: "0955", end: "1040" },
+    "04":{ start: "1045", end: "1130" },
+    "05":{ start: "1140", end: "1225" },
+    "06":{ start: "1230", end: "1315" },
+    "07":{ start: "1400", end: "1445" },
+    "08": { start: "1450", end: "1535" },
+    "09": { start: "1555", end: "1640" },
+    "10": { start: "1645", end: "1730" },
+    "11": { start: "1840", end: "1925" },
+    "12": { start: "1930", end: "2015" },
+    "13": { start: "2025", end: "2110" },
+    "14": { start: "2115", end: "2200" },
+  }
+  var nowClass = false
+  var nextClass = false
+  var i = null
+  var j = null
+  for(i=0;i<todayClass.length;i++){
+    if (todayClass[i] != "") {
+      var start = timeList2[sliceStr2(todayClass[i].courseTime).start].start
+      var end = timeList2[sliceStr2(todayClass[i].courseTime).end].end
+      if (nowTime > start && nowTime < end) {
+        nowClass = todayClass[i]
+        break
+      }
+    }
+  }
+
+  for (j = 0; j < todayClass.length; j++) {
+    if (todayClass[j] != "") {
+      var start = timeList2[sliceStr2(todayClass[j].courseTime).start].start
+      if (nowTime < start) {
+        nextClass = todayClass[j]
+        break
+      }
+    }
+  }
+  return { nowClass: nowClass,nextClass: nextClass}
+}
+
+var sliceStr = function (str){
+  if (str.length == 8){
+    return str.slice(1, 3) + '-' + str.slice(4, 6) + '节'
+  } else if (str.length == 11){
+    return str.slice(1, 3) + '-' + str.slice(7, 9) + '节'
+  } else if (str.length == 14) {
+    return str.slice(1, 3) + '-' + str.slice(10, 12) + '节'
+  }
+}
+
+var sliceStr2 = function (str) {
+  if (str.length == 8) {
+    return { start: str.slice(1, 3), end: str.slice(4, 6) }
+  } else if (str.length == 11) {
+    return { start: str.slice(1, 3), end: str.slice(7, 9) }
+  } else if (str.length == 14) {
+    return { start: str.slice(1, 3), end: str.slice(10, 12) }
+  }
+}
+
+var sliceStr3 = function (str) {
+  return str.slice(5, 16)
+}
+
+var formatNumber = function (n){
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
+
+module.exports.sub = sub;
+module.exports.sub2 = sub2;
+module.exports.sub3 = sub3;
+module.exports.getNowClass = getNowClass;
+module.exports.formatNumber = formatNumber;
+module.exports.sliceStr = sliceStr;
+module.exports.sliceStr2 = sliceStr2;
+module.exports.sliceStr3 = sliceStr3;
+module.exports.getClassTime = getClassTime;

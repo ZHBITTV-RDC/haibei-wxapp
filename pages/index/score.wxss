@@ -1,6 +1,7 @@
 /* pages/index/score.wxss */
 page{
   background-color: rgb(247, 247, 247);
+  padding-bottom: 2%;
 }
 .score{
   background-color: white;
@@ -40,12 +41,10 @@ page{
 }
 .scoreItem{
   width: 100%;
-  height: 130rpx;
 }
 .scoreLeft{
   width: 70%;
   float: left;
-  height: 130rpx;
 }
 .scoreRight{
   width: 30%;
@@ -54,7 +53,13 @@ page{
   align-items: center;
   justify-content: center;
   display: flex;
+  overflow: auto
+}
+.short{
   height: 130rpx;
+}
+.long{
+  height: 180rpx;
 }
 .scoreName{
   margin-top: 20rpx;
@@ -88,4 +93,17 @@ page{
   justify-content: center;
   display: flex;
   float: left;
+}
+
+.emptyIcon{
+  width: 400rpx;
+  height: 300rpx;
+}
+.emptyTip{
+  color: gray;
+  font-size: 30rpx;
+}
+.emptyListView{
+  margin-top: 40rpx;
+  height: 390rpx;
 }

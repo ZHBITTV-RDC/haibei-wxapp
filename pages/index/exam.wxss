@@ -1,0 +1,88 @@
+/* pages/index/exam.wxss */
+page{
+  background-color: #2da0fd;
+  font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+}
+.top{
+  width: 100%;
+  height: 530rpx;
+  color: red;
+}
+.examItem{
+  background-color: #a9d8ff;
+  overflow:hidden;
+  box-sizing: border-box;
+  height: 150rpx;
+  border-bottom: solid 1px gainsboro;
+}
+.left{
+  width: 72%;
+  height: 100%;
+  float: left;
+}
+.right{
+  width: 28%;
+  float: left;
+  height: 100%;
+}
+.days{
+  float: left;
+  font-size: 100rpx;
+  width: 70%;
+  height: 100%;
+}
+.unit{
+  float: left;
+  width: 30%;
+  height: 100%;
+}
+.examName{
+  font-size: 40rpx;
+  margin-left: 20rpx;
+  padding-top: 10rpx;
+}
+.examLocation{
+  font-size: 25rpx;
+  margin-left: 20rpx;
+  float: left;
+}
+.examTime{
+  font-size: 25rpx;
+  margin-left: 20rpx;
+}
+.examSeat{
+  font-size: 25rpx;
+  margin-left: 20rpx;
+  padding-bottom: 10rpx;
+  float: left;
+}
+.fine{
+  color: #35a678;
+}
+.warning{
+  color: #ffd8a3;
+}
+.close{
+  color: red;
+}
+.topDaysView{
+  width: 50%;
+  height: 100%;
+  font-size: 120rpx;
+  border-bottom: solid 2px red;
+}
+.endIcon{
+  width: 200rpx;
+  height: 150rpx;
+}
+.emptyIcon{
+  width: 400rpx;
+  height: 300rpx;
+}
+.emptyTip{
+  color: white;
+  font-size: 40rpx;
+}
+.emptyListView{
+  margin-top: 300rpx;
+}

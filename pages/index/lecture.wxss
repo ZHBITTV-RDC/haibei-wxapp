@@ -1,6 +1,7 @@
 /* pages/index/score.wxss */
 page{
   background-color: rgb(247, 247, 247);
+  padding-bottom: 10rpx;
 }
 .lecture{
   background-color: white;
@@ -83,4 +84,17 @@ page{
 .lectureLarge{
   height: 160rpx;
   font-size: 33rpx;
+}
+
+.emptyIcon{
+  width: 400rpx;
+  height: 300rpx;
+}
+.emptyTip{
+  color: gray;
+  font-size: 30rpx;
+}
+.emptyListView{
+  margin-top: 40rpx;
+  height: 390rpx;
 }

@@ -1,5 +1,79 @@
-
+.infoTitle{
+  width: 20%;
+  float: left;
+  font-size: 27rpx;
+  margin-left:5%;
+}
+.infoContent{
+  width: 75%;
+  float: left;
+  font-size: 27rpx;
+}
+.infoView{
+  overflow: hidden;
+  color: gray;
+  margin-top: 10rpx;
+}
 /* 学生信息栏 */
+.refreshIcon{
+  width: 35rpx;
+  height: 35rpx;
+  float: right;
+  margin-right: 10rpx;
+}
+.refreshing{
+  -webkit-animation:refreshing .8s linear infinite;
+  animation:refreshAnimation .8s linear infinite;
+}
+@keyframes refreshAnimation{
+  0%{-webkit-transform:rotate(0deg);}
+  25%{-webkit-transform:rotate(90deg);}
+  50%{-webkit-transform:rotate(180deg);}
+	75%{-webkit-transform:rotate(270deg);}
+  100%{-webkit-transform:rotate(360deg);}
+}
+@-webkit-keyframes refreshAnimation{
+  0%{-webkit-transform:rotate(0deg);}
+  25%{-webkit-transform:rotate(90deg);}
+  50%{-webkit-transform:rotate(180deg);}
+	75%{-webkit-transform:rotate(270deg);}
+  100%{-webkit-transform:rotate(360deg);}
+}
+.tipItem{
+  width: 100%;
+  height: 40rpx;
+  padding-top: 5rpx;
+}
+.tipTitle{
+  font-size: 28rpx;
+  float: left;
+  color: gray;
+  margin-left: 30rpx;
+}
+.tipValue{
+  font-size: 28rpx;
+  float: right;
+  color: gray;
+  margin-right: 30rpx;
+}
+.tipInfoItemOutView{
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+.tipInfoView{
+  width: 100%;
+  height: 220rpx;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+.tipInfoItemView{
+  height: 100%;
+  width: 94%;
+  margin-left: 3%;
+  border-radius: 10rpx; 
+  box-shadow: 0 0 10rpx gray;
+}
 .userView{
   /* background-color:red; */
   width: 100%;
@@ -63,7 +137,8 @@
   line-height: 35rpx;
   background-image: -webkit-gradient(linear, left 0, right 0, from(rgb(105,210,231)), to(rgb(135,254,229)));
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-text-fill-color: gray;
 }
 .StudentIdInputView{
   /* background-color: violet; */
@@ -98,8 +173,8 @@
   height: 60rpx;
   width: 90%;
   margin-left: 5%;
-  margin-top: 5rpx;
-  margin-bottom: 5rpx;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
   border-radius: 10rpx;
 }
 .iconView{
@@ -145,17 +220,35 @@
   height: 100rpx;
 }
 .functionNameView{
-  /* background-color: palegreen; */
   width: 170rpx;
   height: 50rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 30rpx;
+  color: rgb(107, 107, 107);
 }
 .bindButtonView{
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 25rpx;
+}
+.userinfoButton{
+  font-size: 17rpx;
+  width: 80%;
+  height: 40rpx;
+  line-height: 40rpx;
+}
+.unReadTitleView{
+  width: 70%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  max-width: 100%;
+}
+.unReadTimeView{
+  width: 30%;
+  color: grey;
+
 }

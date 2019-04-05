@@ -1,0 +1,44 @@
+var calculator = {
+  calculateTime: function (targetHour,targetMinute) {
+    var now = getDate()
+    var target = getDate()
+    target.setHours(targetHour)
+    target.setMinutes(targetMinute)
+    var s1 = now.getTime(), s2 = target.getTime()
+    var total = (s2 - s1) / 1000
+    var day = parseInt(total / (24 * 60 * 60));
+    var afterDay = total - day * 24 * 60 * 60;
+    var hour = parseInt(afterDay / (60 * 60));
+    var afterHour = total - day * 24 * 60 * 60 - hour * 60 * 60;
+    var min = parseInt(afterHour / 60);
+    var afterMin = total - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60;
+    return hour + "时" + min + "分"
+  },
+  getNextTime: function(timeList){
+    var now = getDate()
+    var hour = now.getHours()
+    var minute = now.getMinutes()
+    for(var i=0;i<=timeList.length-1;i++){
+      if (timeList[i].hour > hour){
+        return timeList[i].hour + ":" + timeList[i].minute
+      }
+      if (timeList[i].hour == hour && timeList[i].minute >= minute) {
+        return timeList[i].hour + ":" + timeList[i].minute
+      }
+    }
+    return false
+  },
+  isWeekend: function(){
+    var days = getDate().getDay()
+    if(days >= 1 && days <=5){
+      return false
+    }else{
+      return true
+    }
+  }
+}
+module.exports = {
+  calculateTime: calculator.calculateTime,
+  getNextTime: calculator.getNextTime,
+  isWeekend: calculator.isWeekend
+}

@@ -1,67 +1,51 @@
-var weeksArray = [];
-
-var GetDepartment_info = function (that) {
-  var urlStr = 'http://123.56.180.48:9080/jklApi/rest/' + 'goldDepartment/getHomePageData/' + '8a819ee651431b2701514386fa050008';
-  console.log('科室详情的url：' + urlStr);
-
-  wx.request({
-    url: urlStr,
-    method: "GET",
-    header: {
-      'content-type': 'application/x-www-form-urlencoded',
-      'mhealthkey': '1'
-    },
-    success: function (res) {
-      console.log("科室详情：" + JSON.stringify(res));
-
-      var sList = res.data.data.scheduleInfo;
-      var sch_listData = dealData(sList);
-
-      that.setData({
-
-        sch_listData: sch_listData,
-
-      });
-    },
-    fail: function (e) {
-      that.setData({
-        loadingHidden: true,
-      })
-    }
-  })
-}
-
+var util = require('../../utils/util.js') //引入微信自带的日期格式化
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    sch_listData: [],
-    dateArray: [],
     headList: [
       '星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'
     ],
-    data: {
-      '': [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }, 
-      { value: "23", isHoliday: true }, { value: "24", isHoliday: true }],
-      '一': [{ value: "25" }, { value: "26" }, { value: "27" }, { value: "28" }, { value: "3月",isMonth:true},
-      { value: "2", isHoliday: true }, { value: "3", isHoliday: true }],
+    chineseList: {
+      "一": 1, "二": 2, "三": 3,"四":4,"五":5,"六":6,"七":7,"八":8,"九":9,"十":10,"十一":11,"十二":12,"十三":13,"十四":14,"十五":15,"十六":16,"十七":17,"十八":18,"十九":19,"二十":20
     },
-    longHoliday: [
-      ["8", "15", "22", "29", "5", "12", "19", "26"],
-      ["9", "16", "23", "30", "6", "13", "20", "27"],
-      ["9", "16", "23", "30", "6", "13", "20", "27"],
-      ["9", "16", "23", {value:"8月" , isMonth:true}, "6", "13", "20", "27"],
-    ]
+    data: {},
+    longHoliday: [],
+    tips: [],
+    today: util.formatDateWithMonthAndDay(new Date),
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
     wx.setNavigationBarTitle({
       title: '校历',
+    })
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#2da0fd',
+    })
+    that.setData({
+      accessToken: options.accessToken
+    })
+    wx.request({
+      url: getApp().globalData.requestUrl + 'xl.json',
+      success: function(res){
+        that.setData({
+          data:res.data.xiaoliData,
+          longHoliday: res.data.longHolidayData,
+          tips: res.data.tips
+        })
+      }
+    })
+  },
+  checkTimetable: function(e){
+    var t = this
+    wx.navigateTo({
+      url: './timetable?accessToken='+t.data.accessToken + "&weekIndex="+e.currentTarget.dataset.week,
     })
   }
 })

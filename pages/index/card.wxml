@@ -1,0 +1,129 @@
+<view class='tabbar contentCenter'>
+  <view class='button buttonLeft {{mode==1||mode==2?"choose":"notChoose"}} contentCenter' bindtap='info'>校园卡信息</view>
+  <view class='button buttonRight {{mode==3?"choose":"notChoose"}} contentCenter' bindtap='getCard'>我捡到卡了</view>
+</view>
+<view class='contentView contentCenter' wx:if='{{mode==2}}'>
+  <view class='registerView'>
+    <view class='inputView {{inputing=="cardNo"?"onFoucs":""}}'>
+      <view class='inputTitle contentCenter'>卡号</view>
+      <view class='inputItemView contentCenter'>
+        <input class='inputItem' type='number' value='{{cardNo}}' bindinput='cardNoInputHandle' data-item='cardNo' bindfocus='onFoucs' bindblur='unFoucs'></input>
+      </view>
+    </view>
+    <view class='inputView {{inputing=="phone"?"onFoucs":""}}'>
+      <view class='inputTitle contentCenter'>手机号</view>
+      <view class='inputItemView contentCenter' style='width:55%;'>
+        <input class='inputItem' bindinput='phoneInputHandle' value='{{phone}}' bindfocus='onFoucs' bindblur='unFoucs' data-item='phone'></input>
+      </view>
+      <view class='inputOptionView'>
+        <button class='phoneButton' open-type='getPhoneNumber' bindgetphonenumber='getPhone' plain='true' style='border:none;' loading='{{getingPhone}}'>自动填写</button>
+      </view>
+    </view>
+    <view class='buttonView contentCenter' bindtap='updateInfo'>
+      更新信息
+    </view>
+    <view class='buttonView contentCenter' bindtap='updateCancel'>
+      取消
+    </view>
+  </view>
+</view>
+<view class='cards' wx:if='{{mode==1}}'>
+  <view class='cardItem'>
+    <form class='cardDetail' bindsubmit='changeCardStatus' report-submit='true'>
+      <view class='cardContent'>
+        <view class='left'>学号:</view>
+        <view class='right'>{{cardInfo.xuehao}}</view>
+      </view>
+      <view class='cardContent'>
+        <view class='left'>姓名:</view>
+        <view class='right'>{{cardInfo.studentName}}</view>
+      </view>
+      <view class='cardContent'>
+        <view class='left'>卡号:</view>
+        <view class='right'>{{cardInfo.cardNo!=""?cardInfo.cardNo:"未设置"}}</view>
+      </view>
+      <view class='cardContent'>
+        <view class='left'>手机号:</view>
+        <view class='right'>{{cardInfo.phone!=""?cardInfo.phone:"未设置"}}</view>
+      </view>
+      <view class='cardContent'>
+        <view class='left'>状态:</view>
+        <view class='right'>{{cardInfo.cardStatus==1?"正常":"丢失"}}</view>
+      </view>
+      <view style='font-size:20rpx;width:90%;margin-left:5%;margin-top:15rpx;color:gray'>
+        小提示:当卡的状态为丢失时，如果有同学捡到了你的卡，我们会通过短信和微信通知你的哦，建议你设置手机号码哦
+      </view>
+      <view class='buttonView contentCenter' bindtap='changeInfo'>
+        更改信息
+      </view>
+      <button class='buttonView contentCenter' style='background-color:#FF3366;' form-type='submit'>{{cardInfo.cardStatus==1?"我丢卡了":"我找回卡了"}}</button>
+    </form>
+  </view>
+</view>
+
+<view class='contentView contentCenter' wx:if='{{mode==3}}'>
+  <form class='registerView' bindsubmit='submitFindedCardInfo' report-submit='true'>
+    <view style='width:100%;height:30rpx;margin-top:13px;'>
+        <view class="line">
+          <span>捡到卡信息</span>
+        </view>
+    </view>
+    <view class='inputView {{inputing=="xuehao"?"onFoucs":""}}' style='margin-top:0'>
+      <view class='inputTitle contentCenter'>学号</view>
+      <view class='inputItemView contentCenter'>
+        <input class='inputItem' type='number' name='xuehao' data-item='xuehao' bindfocus='onFoucs' bindblur='unFoucs'></input>
+      </view>
+    </view>
+    <view class='inputView {{inputing=="cardNo"?"onFoucs":""}}'>
+      <view class='inputTitle contentCenter'>卡号</view>
+      <view class='inputItemView contentCenter'>
+        <input class='inputItem' type='number' name='cardNo' data-item='cardNo' bindfocus='onFoucs' bindblur='unFoucs'></input>
+      </view>
+    </view>
+    <view class='inputView {{inputing=="name"?"onFoucs":""}}'>
+      <view class='inputTitle contentCenter'>姓名</view>
+      <view class='inputItemView contentCenter'>
+        <input class='inputItem' type='text' name='name' data-item='name' bindfocus='onFoucs' bindblur='unFoucs'></input>
+      </view>
+    </view>
+    <view style='font-size:20rpx;width:90%;margin-left:5%;margin-top:15rpx;color:gray'>
+      小提示:以上信息至少填写任意一项即可，系统会自动根据信息查询系统，并通知卡主
+    </view>
+    <view style='width:100%;height:30rpx;margin-top:13px;'>
+        <view class="line">
+          <span>你的联系方式</span>
+        </view>
+    </view>
+    <view class='inputView {{inputing=="myName"?"onFoucs":""}}' style='margin-top:0'>
+      <view class='inputTitle contentCenter'>手机</view>
+      <view class='inputItemView contentCenter' style='width:55%;'>
+        <input class='inputItem' type='number' bindfocus='onFoucs' bindblur='unFoucs' data-item='myName' name='phone' value='{{phone}}'></input>
+      </view>
+      <view class='inputOptionView'>
+        <button class='phoneButton' open-type='getPhoneNumber' bindgetphonenumber='getPhone' plain='true' style='border:none;' loading='{{getingPhone}}'>自动填写</button>
+      </view>
+    </view>
+    <view class='inputView {{inputing=="wechat"?"onFoucs":""}}'>
+      <view class='inputTitle contentCenter'>微信号</view>
+      <view class='inputItemView contentCenter'>
+        <input class='inputItem' type='text' name='wechat' data-item='wechat' bindfocus='onFoucs' bindblur='unFoucs' cursor-spacing='20rpx'></input>
+      </view>
+    </view>
+    <view class='inputView {{inputing=="location"?"onFoucs":""}}'>
+      <view class='inputTitle contentCenter'>取卡地点</view>
+      <view class='inputItemView contentCenter'>
+        <input class='inputItem' type='text' name='location' data-item='location' bindfocus='onFoucs' bindblur='unFoucs' cursor-spacing='20rpx'></input>
+      </view>
+    </view>
+    <view class='inputView {{inputing=="message"?"onFoucs":""}}' style='height:240rpx;'>
+      <view class='inputTitle contentCenter' style='border:none'>留言</view>
+      <view class='textareaView contentCenter'>
+        <textarea class='inputItem' style='height:150rpx;' name='message' type='number' data-item='message' bindfocus='onFoucs' bindblur='unFoucs' cursor-spacing='150rpx'></textarea>
+      </view>
+    </view>
+    <view style='font-size:20rpx;width:90%;margin-left:5%;margin-top:15rpx;color:gray'>
+      小提示:联系方式至少填写任意一项即可，系统会把你填写的信息发送给卡主
+    </view>
+    <button class='buttonView contentCenter' form-type='submit' style='border:none'>提交信息</button>
+  </form>
+</view>

@@ -15,7 +15,16 @@
     <view class='line'></view>
   </view>
   <view class='lectureView'>
-    <view class='lectureItem {{lectureItem.name.length>=12?"lectureLarge":"lectureSmall"}}' wx:for='{{lectureList}}' wx:for-item='lectureItem'>
+    <view class='emptyListView' wx:if='{{lectureList.length<=0}}'>
+      <view class='emptyIconView contentCenter'>
+        <image src='../../img/none.svg' class='emptyIcon' mode='scaleToFill'></image>
+      </view>
+      <view class='emptyTipView contentCenter'>
+        <view class='emptyTip'>你还没有听过讲座哦</view>
+      </view>
+    </view>
+
+    <view class='lectureItem {{lectureItem.name.length>=12?"lectureLarge":"lectureSmall"}}' wx:for='{{lectureList}}' wx:for-item='lectureItem' wx:key='name'>
       <view class='lectureLeft'>
         <view class='lectureName'>{{lectureItem.name}}</view>
         <view class='lectureTime'>{{lectureItem.time}}</view>

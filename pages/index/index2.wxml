@@ -1,28 +1,107 @@
+<wxs src="./index2.wxs" module="tools" />
 <view class="userView">
-<view class='userinfoView'>
-  <view class="userAvatarView">
-    <image class="userAvatar" src="{{userInfo.avatarUrl}}" mode="scaleToFill"></image>
+  <view class='userinfoView'>
+    <view class="userAvatarView">
+      <image class="userAvatar" src="{{hasUserInfo?userInfo.avatarUrl:'../../img/head.svg'}}" mode="scaleToFill"></image>
+    </view>
+    <view class="userNicknameView">
+      <text class="userNickname" wx:if='{{hasBind}}'>{{classData.studentName}}</text>
+      <text class="userNickname" wx:elif='{{hasUserInfo}}'>{{userInfo.nickName}}</text>
+      <text class="userNickname" wx:else>未授权</text>
+    </view>
+    <view class="userNicknameView">
+      <button class='userinfoButton' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权小程序</button>
+    </view>
   </view>
-  <view class="userNicknameView">
-    <text  class="userNickname">陈国俊</text>
+  <view class='studentInfoView'>
+    <view class='bindView' wx:if='{{!hasBind}}'>
+      <view class='title'>
+        教务系统账号
+      </view>
+      <view class='StudentIdInputView'>
+        <input class='StudentIdInput' bindinput='idHandle' placeholder='学号'></input>
+      </view>
+      <view class='StudentPasswordInputView'>
+        <input class='StudentPasswordInput' bindinput='pwdHandle' password='true' placeholder='教务系统密码'></input>
+      </view>
+      <view class='bindButtonView'>
+        <view class='bindButton' bindtap='bindStudent'>绑定</view>
+      </view>
+    </view>
+    <view class='bindView' wx:if='{{hasBind}}'>
+      <view class='title'>
+        教务系统账号
+      </view>
+      <view class='infoView'>
+        <view class='infoTitle'>学号:</view>
+        <view class='infoContent'>{{classData.xuehao}}</view>
+      </view>
+      <view class='infoView'>
+        <view class='infoTitle'>专业:</view>
+        <view class='infoContent'>{{classData.major}}</view>
+      </view>
+      <view class='infoView'>
+        <view class='infoTitle'>班级:</view>
+        <view class='infoContent'>{{classData.class}}</view>
+      </view>
+      <view class='bindButtonView'>
+        <view class='bindButton' bindtap='unBindStudent'>解绑</view>
+      </view>
+    </view>
   </view>
 </view>
-<view class='studentInfoView'>
-  <view class='bindView'>
-    <view class='title'>
-      教务系统账号
-    </view>
-    <view class='StudentIdInputView'>
-      <input class='StudentIdInput' placeholder='学号'></input>
-    </view>
-    <view class='StudentPasswordInputView'>
-      <input class='StudentPasswordInput' password='true' placeholder='教务系统密码'></input>
-    </view>
-    <view class='bindButtonView'>
-      <view class='bindButton' bindtap='bindStudent'>绑定</view>
+
+<view class="tipInfoView" wx:if='{{hasBind}}'>
+  <view class='tipInfoItemOutView'>
+    <view class='tipInfoItemView'>
+      <view class='tipItem'>
+        <view class='tipTitle' style='color:black;'>作业提示</view>
+        <image src='../../img/refresh.svg' bindtap='getHwInfo' class='refreshIcon {{isRefreshing?"refreshing":""}}'></image>
+      </view>
+      <view class='tipItem'>
+        <view class='tipTitle'>未提交作业</view>
+        <view class='tipValue'>{{hasLoadHw?homeworkNum:"--"}} 科</view>
+      </view>
+      <view class='tipItem'>
+        <view class='tipTitle'>科目</view>
+        <view class='tipValue' wx:if='{{!hasLoadHw}}'>--</view>
+        <view class='tipValue' wx:if='{{hasLoadHw}}'>{{homeworkList.length>0 ? tools.sub(homeworkList[0]) : '暂无'}}</view>
+      </view>
+      <view class='tipItem'>
+        <view class='tipValue' wx:if='{{hasLoadHw && homeworkList.length>1}}'>{{tools.sub(homeworkList[1])}}</view>
+      </view>
+      <view class='tipItem'>
+        <view class='tipValue' wx:if='{{hasLoadHw && homeworkList.length>2}}'>{{homeworkList.length>3?"......":tools.sub(homeworkList[2])}}</view>
+      </view>
     </view>
   </view>
-</view>
+  <view class='tipInfoItemOutView'>
+    <view class='tipInfoItemView'>
+      <view class='tipItem'>
+        <view class='tipTitle' style='color:black;'>正在上课</view>
+        <view class='tipValue' wx:if='{{tools.getNowClass(courseData).nowClass}}'>{{tools.sliceStr(tools.getNowClass(courseData).nowClass.courseTime)}}</view>
+        <view class='tipValue' wx:else>-----</view>
+      </view>
+      <view class='tipItem'>
+        <view class='tipTitle'>{{tools.getNowClass(courseData).nowClass?tools.sub2(tools.getNowClass(courseData).nowClass.courseName):"现在没课"}}</view>
+        <block wx:if='{{tools.getNowClass(courseData).nowClass}}'>
+          <view class='tipValue'>{{tools.getNowClass(courseData).nowClass?tools.getNowClass(courseData).nowClass.courseLocation:"-----"}}</view>
+        </block>
+        <block wx:else>
+          <view class='tipValue'>-----</view>
+        </block>
+      </view>
+      <view class='tipItem' style='padding-top:30rpx;'>
+        <view class='tipTitle' style='color:black;'>下一节课</view>
+        <view class='tipValue' wx:if='{{tools.getNowClass(courseData).nextClass}}'>{{tools.sliceStr(tools.getNowClass(courseData).nextClass.courseTime)}}</view>
+        <view class='tipValue' wx:else>-----</view>
+      </view>
+      <view class='tipItem'>
+        <view class='tipTitle'>{{tools.getNowClass(courseData).nextClass?tools.sub2(tools.getNowClass(courseData).nextClass.courseName):"今天没课啦"}}</view>
+        <view class='tipValue'>{{tools.getNowClass(courseData).nextClass?tools.getNowClass(courseData).nextClass.courseLocation:"-----"}}</view>
+      </view>
+    </view>
+  </view>
 </view>
 
 <!-- 分割线 -->
@@ -30,18 +109,36 @@
   <view class='line'></view>
 </view>
 
-<view class='noticeView'>
+<view class='noticeView'  bindtap='openFunction' data-needbind='false' data-function='message'>
   <view class='iconView'>
-    <icon type='info' size='40rpx'></icon>
+    <image src='../../img/message.svg' style='width:60rpx;height:40rpx;'></image>
   </view>
+      
+
   <view class='contentView'>
-    <text>你没有新消息哟~</text>
+    <text wx:if='{{unReadList.length<=0}}'>你没有新消息哟~</text>
+    <view class='unReadTitleView' wx:if='{{unReadList.length>0}}'>
+      <text class='unReadTitle'>新通知:{{unReadTitle}}</text>
+    </view>
+    <view class='unReadTimeView' wx:if='{{unReadList.length>0}}'>
+      <text>{{tools.sliceStr3(unReadTime)}}</text>
+    </view>
   </view>
 </view>
 <!-- 分隔栏 -->
 <view class='blankLine'></view>
 <scroll-view class='functionView' scroll-x='true' scroll-y='false'>
-  <view class='functionItemView' bindtap='timetable'>
+  <block wx:if='{{additionFunction.length>0}}' wx:for='{{additionFunction}}' wx:key='index' wx:for-item='functionItem'>
+    <view class='functionItemView' data-needbind='{{functionItem.needBind}}' bindtap='{{functionItem.type=="url"?"openUrl":""}}' data-url='{{functionItem.url}}'>
+      <view class='functionIconView'>
+        <image src='{{functionItem.icon}}' class='functionIcon'></image>
+      </view>
+      <view class='functionNameView'>
+        {{functionItem.name}}
+      </view>
+    </view>
+  </block>
+  <view class='functionItemView' bindtap='openFunction' data-needbind='true' data-function='timetable'>
     <view class='functionIconView'>
       <image src='../../img/schedule.svg' class='functionIcon'></image>
     </view>
@@ -49,7 +146,7 @@
       课表
     </view>
   </view>
-  <view class='functionItemView' bindtap='score'>
+  <view class='functionItemView'  bindtap='openFunction' data-needbind='true' data-function='score'>
     <view class='functionIconView'>
       <image src='../../img/score.svg' class='functionIcon'></image>
     </view>
@@ -57,15 +154,7 @@
       课程成绩
     </view>
   </view>
-  <view class='functionItemView'>
-    <view class='functionIconView'>
-      <image src='../../img/photo.svg' class='functionIcon'></image>
-    </view>
-    <view class='functionNameView'>
-      照片
-    </view>
-  </view>
-  <view class='functionItemView' bindtap='lecture'>
+  <view class='functionItemView'  bindtap='openFunction' data-needbind='true' data-function='lecture'>
     <view class='functionIconView'>
       <image src='../../img/lecture.svg' class='functionIcon'></image>
     </view>
@@ -73,15 +162,15 @@
       讲座信息
     </view>
   </view>
-  <view class='functionItemView' bindtap='xiaoli'>
+  <view class='functionItemView' bindtap='openFunction' data-needbind='false' data-function='schedule'>
     <view class='functionIconView'>
-      <image src='../../img/schedule.png' class='functionIcon'></image>
+      <image src='../../img/xiaoli.svg' class='functionIcon'></image>
     </view>
     <view class='functionNameView'>
       校历
     </view>
   </view>
-  <view class='functionItemView'>
+  <view class='functionItemView' bindtap='openFunction' data-needbind='true' data-function='46'>
     <view class='functionIconView'>
       <image src='../../img/46.svg' class='functionIcon'></image>
     </view>
@@ -89,7 +178,7 @@
       四六级
     </view>
   </view>
-  <view class='functionItemView'>
+  <view class='functionItemView' bindtap='openFunction' data-needbind='true' data-function='exam'>
     <view class='functionIconView'>
       <image src='../../img/exam.svg' class='functionIcon'></image>
     </view>
@@ -97,7 +186,7 @@
       考试安排
     </view>
   </view>
-  <view class='functionItemView'>
+  <view class='functionItemView' bindtap='openFunction' data-needbind='true' data-function='card'>
     <view class='functionIconView'>
       <image src='../../img/card.svg' class='functionIcon'></image>
     </view>
@@ -105,12 +194,12 @@
       电子校园卡
     </view>
   </view>
-  <view class='functionItemView' bindtap='secondHand'>
+  <view class='functionItemView' bindtap='openFunction' data-needbind='false' data-function='bus'>
     <view class='functionIconView'>
-      <image src='../../img/ershou.svg' class='functionIcon'></image>
+      <image src='../../img/bus.svg' class='functionIcon'></image>
     </view>
     <view class='functionNameView'>
-      二手集市
+      沃尔玛·华发
     </view>
   </view>
 </scroll-view>

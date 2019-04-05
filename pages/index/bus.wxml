@@ -1,0 +1,166 @@
+<wxs module="calculator" src="./bus.wxs"></wxs>
+<view class='busView {{isShow?"show":"hide"}}'>
+  <view class='busItem contentCenter'>
+    <view class='busContent'>
+      <view class='busInfo'>
+        <view class='timeView'>
+          <view class='timeLeft'>下一班车:{{calculator.getNextTime(beiliToHuafa)?calculator.getNextTime(beiliToHuafa):"今天已无车次"}}</view>
+        </view>
+        <view class='info'>
+          <view class='station contentCenter'>北理工</view>
+          <view class='arrowView contentCenter'>
+            <image src='../../img/arrow.svg' class='arrow' mode='scaleToFill'></image>
+          </view>
+          <view class='station contentCenter'>华发</view>
+        </view>
+        <view class='timeView' style='height:auto'>
+          <view class='timeRight'>下一班车:{{calculator.getNextTime(huafaToBeili)?calculator.getNextTime(huafaToBeili):"今天已无车次"}}</view>
+        </view>
+        <view class='locationView' bindtap='checkLocation'>
+          <view class='locationIconView contentCenter'>
+            <image src='../../img/location.svg' mode='scaleToFill' class='locationIcon'></image>
+          </view>
+          <view class='locationContent'>
+            教师公寓12栋(点击可进入导航)
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='timeTable'>
+    <view class='tableHead'>
+      <view class='tableHeadItem contentCenter'>发车时间</view>
+      <view class='tableHeadItem contentCenter'>剩余时间</view>
+      <view class='tableHeadItem contentCenter'>发车时间</view>
+      <view class='tableHeadItem contentCenter'>剩余时间</view>
+    </view>
+    <view class='tableBody'>
+      <view class='tableLeft'>
+        <view class='trip' wx:for='{{beiliToHuafa}}' wx:for-item='item' wx:key='hour'>
+          <view class='tableBodyItem contentCenter'>{{item.hour}}:{{item.minute}}</view>
+          <view class='tableBodyItem contentCenter hasPass' wx:if='{{(nowHour > item.hour) || (nowHour >= item.hour && nowMinute > item.minute)}}'>已发车</view>
+          <view  class='tableBodyItem contentCenter' wx:else>{{calculator.calculateTime(item.hour,item.minute)}}</view>
+        </view>
+      </view>
+      <view class='tableLeft'>
+        <view class='trip' wx:for='{{huafaToBeili}}' wx:for-item='item' wx:key='hour'>
+          <view class='tableBodyItem contentCenter'>{{item.hour}}:{{item.minute}}</view>
+          <view class='tableBodyItem contentCenter hasPass' wx:if='{{(nowHour > item.hour) || (nowHour >= item.hour && nowMinute > item.minute)}}'>已发车</view>
+          <view  class='tableBodyItem contentCenter' wx:else>{{calculator.calculateTime(item.hour,item.minute)}}</view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+<view class='busView {{!isShow?"show":"hide"}}' wx:if='{{calculator.isWeekend()}}'>
+  <view class='busItem contentCenter'>
+    <view class='busContent'>
+      <view class='busInfo'>
+        <view class='timeView'>
+          <view class='timeLeft'>下一班车:{{calculator.getNextTime(beiliToWoermaWorkend)?calculator.getNextTime(beiliToWoermaWorkend):"今天已无车次"}}</view>
+        </view>
+        <view class='info'>
+          <view class='station contentCenter'>北理工</view>
+          <view class='arrowView contentCenter'>
+            <image src='../../img/arrow.svg' class='arrow' mode='scaleToFill'></image>
+          </view>
+          <view class='station contentCenter'>沃尔玛</view>
+        </view>
+        <view class='timeView' style='height:auto'>
+          <view class='timeRight'>下一班车:{{calculator.getNextTime(woermaToBeiliWorkend)?calculator.getNextTime(woermaToBeiliWorkend):"今天已无车次"}}</view>
+        </view>
+        <view class='locationView' bindtap='checkLocation'>
+          <view class='locationIconView contentCenter'>
+            <image src='../../img/location.svg' mode='scaleToFill' class='locationIcon'></image>
+          </view>
+          <view class='locationContent'>
+            教师公寓12栋(点击可进入导航)
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view class='timeTable'>
+    <view class='tableHead'>
+      <view class='tableHeadItem contentCenter'>发车时间</view>
+      <view class='tableHeadItem contentCenter'>剩余时间</view>
+      <view class='tableHeadItem contentCenter'>发车时间</view>
+      <view class='tableHeadItem contentCenter'>剩余时间</view>
+    </view>
+    <view class='tableBody'>
+      <view class='tableLeft'>
+        <view class='trip' wx:for='{{beiliToWoermaWorkend}}' wx:for-item='item' wx:key='hour'>
+          <view class='tableBodyItem contentCenter'>{{item.hour}}:{{item.minute}}</view>
+          <view class='tableBodyItem contentCenter hasPass' wx:if='{{(nowHour > item.hour) || (nowHour >= item.hour && nowMinute > item.minute)}}'>已发车</view>
+          <view  class='tableBodyItem contentCenter' wx:else>{{calculator.calculateTime(item.hour,item.minute)}}</view>
+        </view>
+      </view>
+      <view class='tableLeft'>
+        <view class='trip' wx:for='{{woermaToBeiliWorkend}}' wx:for-item='item' wx:key='hour'>
+          <view class='tableBodyItem contentCenter'>{{item.hour}}:{{item.minute}}</view>
+          <view class='tableBodyItem contentCenter hasPass' wx:if='{{(nowHour > item.hour) || (nowHour >= item.hour && nowMinute > item.minute)}}'>已发车</view>
+          <view  class='tableBodyItem contentCenter' wx:else>{{calculator.calculateTime(item.hour,item.minute)}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='busView {{!isShow?"show":"hide"}}' wx:if='{{!calculator.isWeekend()}}'>
+  <view class='busItem contentCenter'>
+    <view class='busContent'>
+      <view class='busInfo'>
+        <view class='timeView'>
+          <view class='timeLeft'>下一班车:{{calculator.getNextTime(beiliToWoermaWorkday)?calculator.getNextTime(beiliToWoermaWorkday):"今天已无车次"}}</view>
+        </view>
+        <view class='info'>
+          <view class='station contentCenter'>北理工</view>
+          <view class='arrowView contentCenter'>
+            <image src='../../img/arrow.svg' class='arrow' mode='scaleToFill'></image>
+          </view>
+          <view class='station contentCenter'>沃尔玛</view>
+        </view>
+        <view class='timeView' style='height:auto'>
+          <view class='timeRight'>下一班车:{{calculator.getNextTime(woermaToBeiliWorkday)?calculator.getNextTime(woermaToBeiliWorkday):"今天已无车次"}}</view>
+        </view>
+        <view class='locationView' bindtap='checkLocation'>
+          <view class='locationIconView contentCenter'>
+            <image src='../../img/location.svg' mode='scaleToFill' class='locationIcon'></image>
+          </view>
+          <view class='locationContent'>
+            教师公寓12栋(点击可进入导航)
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view class='timeTable'>
+    <view class='tableHead'>
+      <view class='tableHeadItem contentCenter'>发车时间</view>
+      <view class='tableHeadItem contentCenter'>剩余时间</view>
+      <view class='tableHeadItem contentCenter'>发车时间</view>
+      <view class='tableHeadItem contentCenter'>剩余时间</view>
+    </view>
+    <view class='tableBody'>
+      <view class='tableLeft'>
+        <view class='trip' wx:for='{{beiliToWoermaWorkday}}' wx:for-item='item' wx:key='hour'>
+          <view class='tableBodyItem contentCenter'>{{item.hour}}:{{item.minute}}</view>
+          <view class='tableBodyItem contentCenter hasPass' wx:if='{{(nowHour > item.hour) || (nowHour >= item.hour && nowMinute > item.minute)}}'>已发车</view>
+          <view  class='tableBodyItem contentCenter' wx:else>{{calculator.calculateTime(item.hour,item.minute)}}</view>
+        </view>
+      </view>
+      <view class='tableLeft'>
+        <view class='trip' wx:for='{{woermaToBeiliWorkday}}' wx:for-item='item' wx:key='hour'>
+          <view class='tableBodyItem contentCenter'>{{item.hour}}:{{item.minute}}</view>
+          <view class='tableBodyItem contentCenter hasPass' wx:if='{{(nowHour > item.hour) || (nowHour >= item.hour && nowMinute > item.minute)}}'>已发车</view>
+          <view  class='tableBodyItem contentCenter' wx:else>{{calculator.calculateTime(item.hour,item.minute)}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<image class='change' bindtap='change' src='../../img/change.svg'></image>

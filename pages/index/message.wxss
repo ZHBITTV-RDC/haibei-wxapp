@@ -1,0 +1,67 @@
+page{
+  background-color: gainsboro;
+}
+.messageItem{
+  width: 100%;
+  background-color: white;
+  position: relative;
+}
+.messageHead{
+  height: 45rpx;
+  margin-left: 4%;
+  padding-top: 4%;
+  width: 92%;
+}
+.messageTitle{
+  height: 100%;
+  float: left;
+  font-size: 35rpx;
+  width: 78%;
+  position: relative;
+}
+.messageTime{
+  height: 100%;
+  font-size: 25rpx;
+  color: gray;
+  width: 22%;
+  float: left;
+  position: relative;
+}
+.text{
+  position: absolute;
+  bottom: 0;
+}
+.messageBody{
+  font-size: 30rpx;
+  margin-left: 4%;
+  width: 92%;
+  margin-top: 20rpx;
+  color: gray;
+  padding-bottom: 10rpx;
+  border-bottom: gainsboro solid 1rpx;
+}
+.messageDetail{
+  color:skyblue;
+  padding: 20rpx 0;
+  margin-left: 4%;
+  font-size: 30rpx;
+}
+.line{
+  width: 100%;
+  background-color: gainsboro;
+  height: 15rpx;
+}
+.hide{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:4;
+}
+.unReadIcon{
+  width:103rpx;
+  height:87rpx;
+  position:absolute;
+  right: 0rpx;
+  z-index: 1000
+}

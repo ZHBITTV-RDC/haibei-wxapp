@@ -29,3 +29,14 @@
   width: 100%;
   height: 5px;
 }
+
+.contentCenter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verticalCenter{
+  display: flex;
+  align-items: center;
+}

@@ -1,10 +1,15 @@
 <!--课程表-->
+<wxs src="./index2.wxs" module="tools" />
 <view class='settingButtonView' bindtap='showButton'>
   <image src='../../img/setting.svg' class='setting'></image>
 </view>
 <view class='{{isShow?"show":"hide"}} settingView'>
-  <view class='settingItem' style='border-bottom:solid 1px rgb(211, 211, 211);'>选择学期:2018-2019学年第一学期</view>
-  <view class='settingItem' style='margin-top:10rpx;'>选择周次:第一周</view>
+  <picker range='{{semester}}' range-key='name' value='{{semesterIndex}}' bindchange='changeSemester'>
+    <view class='settingItem' style='border-bottom:solid 1px rgb(211, 211, 211);'>选择学期:{{semester[semesterIndex].name}}</view>
+  </picker>
+    <picker range='{{weekList}}' range-key='value' value='{{weekIndex}}' bindchange='changeWeek'>
+      <view class='settingItem' style='margin-top:10rpx;'>选择周次:{{weekList[weekIndex].value}}</view>
+  </picker>
 </view>
 <scroll-view scroll-x scroll-y>
   <view class='titleView'>
@@ -16,11 +21,57 @@
     <view class='title'>周六</view>
     <view class='title'>周日</view>
   </view>
-  <view class='courseView' wx:for="{{courseList}}" wx:for-item="nowList">
-    <view class='time'>{{index+1}}-{{index+2}}</view>
-    <view class='courseItem' wx:for="{{nowList}}" wx:for-item="classItem">
-      <view class='courseName'>{{classItem.courseName}}</view>
-      <view class='courseLocation'>{{classItem.courseLocation}}</view>
+  <view class='head'>
+    <view class='time1 contentCenter' wx:for='{{[1,2,3,4,5,6,7,8,9,10,11,12,13,14]}}' wx:key='index'>{{item}}</view>
+  </view>
+    <view class='classTable' wx:for='{{courseList}}' wx:for-item='dayItem' wx:key='index'>
+      <block wx:for='{{dayItem}}' wx:key='index1' wx:for-index='index1'  wx:for-item='courseItem'>
+          <view class='classItem classItemL2 bg{{courseItem.color}}' wx:if='{{courseItem.courseTime.length==8}}' data-courseName='{{courseItem.courseName}}' data-teacherName='{{courseItem.teacherName}}' data-courseWeek='{{courseItem.courseWeek}}' data-courseTime='{{courseItem.courseTime}}' data-courseLocation='{{courseItem.courseLocation}}' bindtap='showDetail'>
+            <view class='courseName'>{{courseItem.courseName}}</view>
+            <view class='courseLocation'>{{courseItem.courseLocation}}</view>
+          </view>
+          <block  wx:if='{{courseItem.courseTime.length==11 && courseItem.courseName != dayItem[index1-1].courseName}}'>
+            <view class='classItem classItemL3 bg{{courseItem.color}}' data-courseName='{{courseItem.courseName}}' data-teacherName='{{courseItem.teacherName}}' data-courseWeek='{{courseItem.courseWeek}}' data-courseTime='{{courseItem.courseTime}}' data-courseLocation='{{courseItem.courseLocation}}' bindtap='showDetail'>
+              <view class='courseName'>{{courseItem.courseName}}</view>
+              <view class='courseLocation'>{{courseItem.courseLocation}}</view>
+            </view>
+            <view class='classItem classItemL1'></view>
+          </block>
+          <view class='classItem classItemL4 bg{{courseItem.color}}' wx:if='{{courseItem.courseTime.length==14 && courseItem.courseName != dayItem[index1-1].courseName}}' data-courseName='{{courseItem.courseName}}' data-teacherName='{{courseItem.teacherName}}' data-courseWeek='{{courseItem.courseWeek}}' data-courseTime='{{courseItem.courseTime}}' data-courseLocation='{{courseItem.courseLocation}}' bindtap='showDetail'>
+              <view class='courseName'>{{courseItem.courseName}}</view>
+              <view class='courseLocation'>{{courseItem.courseLocation}}</view>
+          </view>
+          <block wx:if='{{!courseItem}}'>
+            <view class='classItem classItemL1'></view>
+            <view class='classItem classItemL1'></view>
+          </block>
+      </block>
+    </view>
+</scroll-view>
+<view class="shadow" style='display: {{isShowDetail?"flex":"none"}}' bindtap='hideDetail'>
+  <view class="courseDetail">
+    <view class="courseDetailHead">
+      <view class="courseDetailName"><text>{{detail.courseName}}</text></view>
+    </view>
+    <view class="courseDetailItem">
+      <view class="courseDetailTitle"><text>课室：</text></view>
+      <view class="courseDetailValue"><text>{{tools.sub3(detail.courseLocation)}}</text></view>
+    </view>
+    <view class="courseDetailItem">
+      <view class="courseDetailTitle"><text>节数：</text></view>
+      <view class="courseDetailValue"><text>{{detail.courseTime}}</text></view>
+    </view>
+    <view class="courseDetailItem">
+      <view class="courseDetailTitle"><text>时间：</text></view>
+      <view class="courseDetailValue"><text>{{tools.getClassTime(detail)}}</text></view>
+    </view>
+    <view class="courseDetailItem">
+      <view class="courseDetailTitle"><text>周数：</text></view>
+      <view class="courseDetailValue"><text>{{detail.courseWeek}}</text></view>
+    </view>
+    <view class="courseDetailItem">
+      <view class="courseDetailTitle"><text>老师：</text></view>
+      <view class="courseDetailValue"><text>{{detail.teacherName}}</text></view>
     </view>
   </view>
-</scroll-view>
+</view>

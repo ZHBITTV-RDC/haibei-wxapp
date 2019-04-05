@@ -1,0 +1,42 @@
+<!--pages/index/exam.wxml-->
+<view class='emptyListView' wx:if='{{examList.length<=0}}'>
+  <view class='emptyIconView contentCenter'>
+    <image src='../../img/none.svg' class='emptyIcon' mode='scaleToFill'></image>
+  </view>
+  <view class='emptyTipView contentCenter'>
+    <view class='emptyTip'>恭喜你，现在还没有考试哦</view>
+  </view>
+</view>
+<view class='top' wx:if='{{examList.length>0}}'>
+  <view style='height:250rpx;width:100%;margin-top:50rpx;' class='contentCenter'>
+    <view class='topDaysView contentCenter'>
+    {{examItem.hasPass?examList[0].day:"已结束"}}
+    </view>
+  </view>
+  <view style='width:100%;font-size:40rpx;margin-top:20rpx;' class='contentCenter'>
+    {{examList[0].name}}
+  </view>
+  <view style='width:100%;font-size:30rpx;' class='contentCenter'>
+    {{examList[0].date}} {{examList[0].time}}
+  </view>
+  <view style='width:100%;font-size:30rpx;' class='contentCenter'>
+    {{examList[0].location}} 座位:{{examList[0].seat}}
+  </view>
+</view>
+<view class='examList' wx:if='{{examList.length>0}}'>
+  <view class='examItem' wx:for='{{examList}}' wx:for-item='examItem' wx:key='examName'>
+    <view class='left'>
+      <view class='examName'>{{examItem.name}}</view>
+      <view class='examTime'>{{examItem.date}} {{examItem.time}}</view>
+      <view class='examLocation'>考场:{{examItem.location}}</view>
+      <view class='examSeat'>座位号:{{examItem.seat}}</view>
+    </view>
+    <view class='right'>
+      <view class='days contentCenter fine' wx:if='{{examItem.day>14 && !examItem.hasPass}}'>{{examItem.day}}</view>
+      <view class='days contentCenter warning' wx:if='{{examItem.day>7 && examItem.day<=14 && !examItem.hasPass}}'>{{examItem.day}}</view>
+      <view class='days contentCenter close' wx:if='{{examItem.day>=0 && examItem.day<=7 && !examItem.hasPass}}'>{{examItem.day}}</view>
+      <image src='../../img/end.svg' class='endIcon' mode='scaleToFill' wx:if='{{examItem.hasPass}}'></image>
+      <view class='unit verticalCenter' wx:if='{{!examItem.hasPass}}'>天</view>
+    </view>
+  </view>
+</view>

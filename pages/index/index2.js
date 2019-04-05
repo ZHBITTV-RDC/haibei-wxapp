@@ -1,20 +1,148 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+var t = null
 Page({
   data: {
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    jwid: "",
+    jwpwd: "",
+    accessToken: null,
+    hasBind: false,
+    classData: {},
+    additionFunction: [],
+    isRefreshing: false,
+    hasLoadHw: false,
+    homeworkNum: 0,
+    homeworkList: [],
+    hasLoadTimeTable: false,
+    courseData: null,
+    informationList: [],
+    unReadList: [],
+    unReadTitle: "",
+    unReadTime: ""
+  },
+  idHandle: function(e){
+    this.setData({
+      jwid: e.detail.value
+    })
+  },
+  pwdHandle: function (e) {
+    this.setData({
+      jwpwd: e.detail.value
+    })
+  },
+  
+  getHwInfo: function(){
+    var that = this
+    that.setData({
+      isRefreshing: true
+    })
+    wx.request({
+      url: getApp().globalData.requestUrl + 'api.php',
+      data: {
+        method: 'homework',
+        accessToken: that.data.accessToken
+      },
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        if (res.data.status == 1) {
+          that.setData({
+            hasLoadHw: true,
+            homeworkNum: res.data.homeworkNum,
+            homeworkList: res.data.homeworkList,
+          })
+        }
+      },
+      complete: res => {
+        that.setData({
+          isRefreshing: false
+        })
+      }
+    })
+  },
+  loginSystem: function(code){
+    var that = this
+    wx.request({
+      url: getApp().globalData.requestUrl + 'onLogin.php',
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        code: code
+      },
+      success: function (res) {
+        if (res.data.status == 0) {
+          wx.showModal({
+            title: '小程序登录失败',
+            content: '请重新打开小程序',
+            showCancel: false
+          })
+          return
+        }
+        that.setData({
+          accessToken: res.data.accessToken,
+          additionFunction: res.data.additionFunction
+        })
+        if (res.data.hasBind == 1) {
+          that.setData({
+            hasBind: true,
+            classData: res.data.classData,
+          })
+          that.getHwInfo()
+          that.getTimetable()
+          that.getInformation()
+        }
+      },
+      fail: function () {
+        wx.showModal({
+          title: '小程序登录失败',
+          content: '无法连接到服务器，请稍候再试',
+          showCancel: false
+        })
+      },
+      complete: function () {
+        wx.hideLoading()
+      }
+    })
   },
   onLoad: function () {
+    var that = this
     wx.setNavigationBarTitle({
       title: '北理珠微校园',
     })
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: '#2da0fd',
+    })
+    wx.showLoading({
+      title: '登录小程序中',
+    })
+    wx.login({
+      success(res) {
+        if (res.code) {
+          that.loginSystem(res.code)
+        } else {
+          wx.showModal({
+            title: '小程序登录失败',
+            content: '请重新打开小程序',
+            showCancel: false
+          })
+        }
+      },
+      fail(res){
+        wx.showModal({
+          title: '小程序登录失败',
+          content: '请重新打开小程序',
+          showCancel: false
+        })
+      }
     })
     if (app.globalData.userInfo) {
       this.setData({
@@ -43,42 +171,274 @@ Page({
       })
     }
   },
+  getInformation: function() {
+    var that = this
+    var lastId = 0
+    try {
+      const value = wx.getStorageSync('lastId')
+      if(value) lastId=value
+      wx.request({
+        url: getApp().globalData.requestUrl + 'api.php',
+        data: {
+          accessToken: that.data.accessToken,
+          method: "getInformation",
+          lastId: lastId
+        },
+        method: "POST",
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function (res) {
+          if (res.data.informationList.length>0){
+            const list = wx.getStorageSync('information')
+            if(list){
+              wx.setStorage({
+                key: 'information',
+                data: res.data.informationList.concat(list)
+              })
+              that.setData({
+                informationList: res.data.informationList.concat(list),
+              })
+            }else{
+              wx.setStorage({
+                key: 'information',
+                data: res.data.informationList
+              })
+              that.setData({
+                informationList: res.data.informationList,
+              })
+            }
+            wx.setStorage({
+              key: 'lastId',
+              data: res.data.lastId
+            })
+          }
+          const list = wx.getStorageSync('information')
+          var unReadList = []
+          for(var i in list){
+            if(!list[i].hasRead){
+              unReadList.push({title: list[i].title,time: list[i].time})
+            }
+          }
+          if (unReadList.length > 0){
+            that.setData({
+              unReadTitle: unReadList[0].title,
+              unReadTime: unReadList[0].time
+            })
+          }
+          that.setData({
+            unReadList: unReadList
+          })
+          wx.stopPullDownRefresh()
+        }
+      })
+    } catch (e) {
+      // Do something when catch error
+    }
+  },
+  onHide: function(){
+    clearInterval(t)
+  },
+  onShow: function(){
+    if(!this.data.hasBind) return
+    var that = this
+    const list = wx.getStorageSync('information')
+    var unReadList = []
+    for (var i in list) {
+      if (!list[i].hasRead) {
+        unReadList.push({ title: list[i].title, time: list[i].time })
+      }
+    }
+    if (unReadList.length > 0) {
+      that.setData({
+        unReadTitle: unReadList[0].title,
+        unReadTime: unReadList[0].time
+      })
+    }
+    that.setData({
+      unReadList: unReadList
+    })
+    // var index = 1
+    // t = setInterval(function () {
+    //   if (unReadList.length > 0) {
+    //     that.setData({
+    //       unReadTitle: unReadList[index].title,
+    //       unReadTime: unReadList[index].time
+    //     })
+    //     index++
+    //     if (index >= unReadList.length) {
+    //       index = 0
+    //     }
+    //   }
+    // }, 3000)
+  },
+  getTimetable: function () {
+    var that = this
+    wx.request({
+      url: getApp().globalData.requestUrl + 'api.php',
+      data: {
+        accessToken: that.data.accessToken,
+        method: "timetable"
+      },
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        if (res.data.status) {
+          that.setData({
+            hasLoadTimeTable: true,
+            courseData: res.data.courseData
+          })
+        }else{
+          wx.showModal({
+            title: '查询课表失败',
+            content: res.data.reason,
+            showCancel: false
+          })
+        }
+      }
+    })
+  },
+
   getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+    if (e.detail.errMsg != "getUserInfo:fail auth deny"){
+      app.globalData.userInfo = e.detail.userInfo
+      this.setData({
+        userInfo: e.detail.userInfo,
+        hasUserInfo: true
+      })
+    }
+  },
+  unBind:function(){
+    var that = this
+    wx.showLoading({
+      title: '解绑中',
+    })
+    wx.request({
+      url: getApp().globalData.requestUrl + 'api.php',
+      data: {
+        method: 'unBind',
+        accessToken: that.data.accessToken
+      },
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        if (res.data.status == 1) {
+          that.setData({
+            hasBind: false,
+            classData: {},
+            hasLoadHw: false,
+            hasLoadTimeTable: false,
+            homeworkNum: 0,
+            homeworkList: [],
+            courseData: [],
+            informationList: [],
+            unReadList: [],
+            unReadTitle: "",
+            unReadTime: "",
+          })
+          clearInterval(t)
+          wx.showModal({
+            title: '解绑成功',
+            content: '解绑成功，我们期待你的回来哦',
+            showCancel: false
+          })
+        }
+      },
+      complete: res => {
+        wx.hideLoading()
+      }
+    })
+  },
+  unBindStudent: function(){
+    var that = this
+    wx.showModal({
+      title: '解绑确认',
+      content: '请不要解绑我好吗，我能为你提供更多服务的',
+      cancelText: '不解绑了',
+      confirmText: '决定解绑',
+      cancelColor: '#008000',
+      confirmColor: '#FF0000',
+      success:function(e){
+        if(e.confirm){
+          that.unBind()
+        }
+      }
+    })
+  },
+  openUrl: function(e){
+    var that = this
+    if (e.currentTarget.dataset.needbind && !that.data.hasBind){
+      wx.showModal({
+        title: '未绑定学号',
+        content: '请先绑定教务系统账号哦',
+        showCancel: false
+      })
+      return 
+    }
+    wx.navigateTo({
+      url: './web?url=' + e.currentTarget.dataset.url + '&accessToken=' + that.data.accessToken,
     })
   },
   bindStudent: function(e){
+    var that = this
     wx.showLoading({
       title: '正在绑定中...',
     })
-  },
-  xiaoli: function(){
-    wx.navigateTo({
-      url: './schedule',
+    wx.request({
+      url: getApp().globalData.requestUrl + 'api.php',
+      data: {
+        jwid: that.data.jwid,
+        jwpwd: that.data.jwpwd,
+        accessToken: that.data.accessToken,
+        method: "signin"
+      },
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success:function(res){
+        if(res.data.status){
+          that.setData({
+            hasBind: true,
+            classData: res.data.classData,
+          })
+          that.getHwInfo()
+          that.getTimetable()
+          that.getInformation()
+        }else{
+          wx.showModal({
+            title: '绑定失败',
+            content: res.data.reason,
+            showCancel: false
+          })
+        }
+      },
+      complete:function(){
+        wx.hideLoading()
+      }
     })
   },
-  timetable: function(){
-    wx.navigateTo({
-      url: './timetable',
-    })
+
+  onPullDownRefresh:function(){
+    this.getInformation()
   },
-  score: function(){
+
+  openFunction:function(e){
+    var that = this
+    if (e.currentTarget.dataset.needbind == "true" && !that.data.hasBind){
+      wx.showModal({
+        title: '未绑定学号',
+        content: '请先绑定教务系统账号哦',
+        showCancel: false
+      })
+      return
+    }
     wx.navigateTo({
-      url: './score',
-    })
-  },
-  lecture: function(){
-    wx.navigateTo({
-      url: './lecture',
-    })
-  },
-  secondHand: function(){
-    wx.navigateTo({
-      url: './secondHand',
+      url: './' + e.currentTarget.dataset.function + '?accessToken=' + that.data.accessToken,
     })
   }
 })

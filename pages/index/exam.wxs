@@ -1,0 +1,22 @@
+var calculator = {
+  calculateDate: function (targetDate) {
+    var now = getDate()
+    now.setHours(0)
+    now.setMinutes(0)
+    now.setSeconds(0)
+    console.log(now)
+    var target = getDate(targetDate.replace('-', '/').replace('-', '/') + " 00:00:00")
+    console.log(target)
+    var s1 = now.getTime(), s2 = target.getTime()
+    var total = (s2 - s1) / 1000
+    var day = parseInt(total / (24 * 60 * 60));
+    if(day < 0){
+      return false
+    }else{
+      return day
+    }
+  }
+}
+module.exports = {
+  calculateDate: calculator.calculateDate,
+}

@@ -1,19 +1,27 @@
 {
   "pages": [
     "pages/index/index2",
+    "pages/index/message",
+    "pages/index/exam",
+    "pages/index/bus",
+    "pages/index/46",
+    "pages/index/timetable",
+    
     "pages/index/score",
     "pages/index/index",
-    "pages/index/timetable",
     "pages/logs/logs",
     "pages/index/schedule",
-    "pages/index/secondHand",
     "pages/index/lecture",
-    "pages/index/46"
+    "pages/index/web",
+    "pages/index/card"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
-  }
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wx0d1dba6576a9771d"
+  ]
 }

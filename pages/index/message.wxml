@@ -1,0 +1,16 @@
+<wxs src="./index2.wxs" module="tools" />
+<view class='messageItem' wx:for='{{informationList}}' wx:key='id'>
+  <image src='../../img/unRead.svg' class='unReadIcon' wx:if='{{!item.hasRead}}'></image>
+  <view class='messageHead'>
+    <view class='messageTitle'><text class='text'>{{item.title}}</text></view>
+    <view class='messageTime'><text class='text'>{{tools.sliceStr3(item.time)}}</text></view>
+  </view>
+  <view class='messageBody {{status[item.id] == 0?"hide":""}}'>
+    <text>{{item.content}}</text>
+  </view>
+  <view class='messageDetail' wx:if='{{status[item.id] == 0}}' data-id='{{item.id}}' bindtap='read' data-type='{{item.type}}' data-url='{{item.url}}'>
+    查看详情
+    <image src='../../img/detail.svg' style='width:40rpx;height:40rpx;float:right;padding-right:4%;'></image>
+  </view>
+  <view class='line'></view>
+</view>

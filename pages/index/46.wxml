@@ -1,2 +1,54 @@
-<!--pages/index/46.wxml-->
-<text>pages/index/46.wxml</text>
+<view class='tabbar contentCenter'>
+  <view class='button buttonLeft choose contentCenter'>准考证登记</view>
+  <view class='button buttonRight notChoose contentCenter' bindtap='score'>成绩查询</view>
+</view>
+<view class='contentView contentCenter'>
+  <view class='registerView'>
+    <view class='inputView'>
+      <view class='inputTitle contentCenter'>类型</view>
+      <view class='inputItemView contentCenter'>
+        <picker class="inputItem" bindchange="bindKindChange" value="{{kindIndex}}" range="{{kindList}}">
+          <view>
+            {{kindList[kindIndex]}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='inputView {{idIsFoucs?"onFoucs":""}}'>
+      <view class='inputTitle contentCenter'>准考证</view>
+      <view class='inputItemView contentCenter'>
+        <input class='inputItem' type='number' value='{{id}}' bindinput='idInputHandle' bindfocus='idOnFoucs' bindblur='idUnFoucs'></input>
+      </view>
+    </view>
+    <view class='inputView {{passwordIsFoucs?"onFoucs":""}}'>
+      <view class='inputTitle contentCenter'>密码</view>
+      <view class='inputItemView contentCenter'>
+        <input class='inputItem' bindinput='passwordInputHandle' value='{{password}}' bindfocus='passwordOnFoucs' bindblur='passwordUnFoucs'></input>
+      </view>
+    </view>
+    <view class='buttonView contentCenter' bindtap='add'>
+      新增准考证
+    </view>
+  </view>
+</view>
+<view class='cards'>
+  <view class='cardItem' wx:for='{{cardList}}' wx:for-item='cardItem' wx:key='id'>
+    <view class='cardDetail'>
+      <view class='cardContent'>
+        <view class='left'>类型:</view>
+        <view class='right'>{{cardItem.kind}}</view>
+      </view>
+      <view class='cardContent'>
+        <view class='left'>准考证号:</view>
+        <view class='right' bindtap='copy' data-content='{{cardItem.admissionId}}'>{{cardItem.admissionId}}</view>
+      </view>
+      <view class='cardContent'>
+        <view class='left'>密码:</view>
+        <view class='right' bindtap='copy' data-content='{{cardItem.password}}'>{{cardItem.password}}</view>
+      </view>
+    </view>
+    <view class='deleteView contentCenter' bindtap='deleteCard' data-id='{{cardItem.id}}'>
+      <image src='../../img/delete.svg' class='deleteImg' data-id='{{cardItem.id}}'></image>
+    </view>
+  </view>
+</view>

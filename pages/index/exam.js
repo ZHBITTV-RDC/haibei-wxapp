@@ -1,7 +1,11 @@
+// pages/index/exam.js
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    hasPass: 0,
-    lectureList: [],
+    examList:[],
     accessToken: null
   },
 
@@ -9,28 +13,35 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: '讲座信息',
-    })
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: '#2da0fd',
+    })
+    wx.setNavigationBarTitle({
+      title: '考试安排',
     })
     this.setData({
       accessToken: options.accessToken
     })
   },
 
-  checkLecture: function(){
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    this.getExamInfo()
+  },
+
+  getExamInfo: function(){
     var that = this
     wx.showLoading({
       title: '正在查询中',
     })
     wx.request({
       url: getApp().globalData.requestUrl + 'api.php',
-      data: { 
-        method: 'lecture',
-        accessToken: that.data.accessToken 
+      data: {
+        method: 'exam',
+        accessToken: that.data.accessToken
       },
       method: "POST",
       header: {
@@ -39,12 +50,11 @@ Page({
       success: function (res) {
         if (res.data.status == 1) {
           that.setData({
-            lectureList: res.data.lectureData,
-            hasPass: res.data.pass
+            examList: res.data.examList,
           })
         } else {
           wx.showModal({
-            title: '查询讲座失败',
+            title: '查询考试安排失败',
             content: res.data.reason,
             showCancel: false
           })
@@ -58,17 +68,38 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * 生命周期函数--监听页面显示
    */
-  onReady: function () {
-    this.checkLecture()
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.checkLecture()
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
   },
 
   /**
