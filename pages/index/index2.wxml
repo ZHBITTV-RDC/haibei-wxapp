@@ -202,4 +202,12 @@
       沃尔玛·华发
     </view>
   </view>
+    <view class='functionItemView' bindtap='openUrl' data-url='https://mp.weixin.qq.com/s/9qW9JNs9x9CRp2mJmenYow'>
+    <view class='functionIconView'>
+      <image src='../../img/contact.svg' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      商务合作
+    </view>
+  </view>
 </scroll-view>

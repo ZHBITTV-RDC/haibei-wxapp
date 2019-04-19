@@ -6,7 +6,6 @@
     "pages/index/bus",
     "pages/index/46",
     "pages/index/timetable",
-    
     "pages/index/score",
     "pages/index/index",
     "pages/logs/logs",
@@ -23,5 +22,6 @@
   },
   "navigateToMiniProgramAppIdList": [
     "wx0d1dba6576a9771d"
-  ]
+  ],
+  "sitemapLocation": "sitemap.json"
 }

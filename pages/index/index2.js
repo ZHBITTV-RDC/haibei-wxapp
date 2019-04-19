@@ -34,7 +34,6 @@ Page({
       jwpwd: e.detail.value
     })
   },
-  
   getHwInfo: function(){
     var that = this
     that.setData({
