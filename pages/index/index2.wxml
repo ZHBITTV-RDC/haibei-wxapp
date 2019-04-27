@@ -75,7 +75,7 @@
       </view>
     </view>
   </view>
-  <view class='tipInfoItemOutView'>
+  <view class='tipInfoItemOutView' bindtap='showDetail'>
     <view class='tipInfoItemView'>
       <view class='tipItem'>
         <view class='tipTitle' style='color:black;'>正在上课</view>
@@ -85,7 +85,7 @@
       <view class='tipItem'>
         <view class='tipTitle'>{{tools.getNowClass(courseData).nowClass?tools.sub2(tools.getNowClass(courseData).nowClass.courseName):"现在没课"}}</view>
         <block wx:if='{{tools.getNowClass(courseData).nowClass}}'>
-          <view class='tipValue'>{{tools.getNowClass(courseData).nowClass?tools.getNowClass(courseData).nowClass.courseLocation:"-----"}}</view>
+          <view class='tipValue'>{{tools.getNowClass(courseData).nowClass?tools.sub4(tools.getNowClass(courseData).nowClass.courseLocation):"-----"}}</view>
         </block>
         <block wx:else>
           <view class='tipValue'>-----</view>
@@ -98,7 +98,7 @@
       </view>
       <view class='tipItem'>
         <view class='tipTitle'>{{tools.getNowClass(courseData).nextClass?tools.sub2(tools.getNowClass(courseData).nextClass.courseName):"今天没课啦"}}</view>
-        <view class='tipValue'>{{tools.getNowClass(courseData).nextClass?tools.getNowClass(courseData).nextClass.courseLocation:"-----"}}</view>
+        <view class='tipValue'>{{tools.getNowClass(courseData).nextClass?tools.sub4(tools.getNowClass(courseData).nextClass.courseLocation):"-----"}}</view>
       </view>
     </view>
   </view>
@@ -202,7 +202,7 @@
       沃尔玛·华发
     </view>
   </view>
-    <view class='functionItemView' bindtap='openUrl' data-url='https://mp.weixin.qq.com/s/9qW9JNs9x9CRp2mJmenYow'>
+    <view class='functionItemView' bindtap='openUrl' data-url='https://mp.weixin.qq.com/s/KXi6vC1PPgbHxXoXy6xVmQ'>
     <view class='functionIconView'>
       <image src='../../img/contact.svg' class='functionIcon'></image>
     </view>
@@ -210,4 +210,17 @@
       商务合作
     </view>
   </view>
+  <view class='functionItemView' bindtap='openFunction' data-needbind='false' data-function='advance'>
+    <view class='functionIconView'>
+      <image src='../../img/advance.svg' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      投诉建议
+    </view>
+  </view>
 </scroll-view>
+<view class="shadow" style='display: {{isShowDetail?"flex":"none"}}' bindtap='hideDetail'>
+  <view class="courseDetail">
+
+  </view>
+</view>

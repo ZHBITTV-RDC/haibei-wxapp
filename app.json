@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index2",
+    "pages/index/advance",
     "pages/index/message",
     "pages/index/exam",
     "pages/index/bus",

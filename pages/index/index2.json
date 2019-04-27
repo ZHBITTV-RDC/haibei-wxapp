@@ -1,4 +1,7 @@
 {
   "usingComponents": {},
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "口袋北理",
+  "navigationBarBackgroundColor": "#2da0fd",
+  "navigationBarTextStyle": "white"
 }

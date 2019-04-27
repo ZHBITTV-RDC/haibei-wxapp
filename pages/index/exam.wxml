@@ -10,7 +10,7 @@
 <view class='top' wx:if='{{examList.length>0}}'>
   <view style='height:250rpx;width:100%;margin-top:50rpx;' class='contentCenter'>
     <view class='topDaysView contentCenter'>
-    {{examItem.hasPass?examList[0].day:"已结束"}}
+    {{!examList[0].hasPass?examList[0].day:"已结束"}}
     </view>
   </view>
   <view style='width:100%;font-size:40rpx;margin-top:20rpx;' class='contentCenter'>

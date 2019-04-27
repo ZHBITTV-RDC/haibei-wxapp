@@ -20,8 +20,19 @@ var sub2 = function (val) {
   }
 }
 
-var sub3 = function (val) {
+var sub4 = function (val) {
   if (val.length == 0 || val == undefined) {
+    return;
+  }
+  if (val.length > 5) {
+    return val.substring(0, 5) + "..";
+  } else {
+    return val;
+  }
+}
+
+var sub3 = function (val) {
+  if (val.length == 0 || val == undefined || val == null) {
     return;
   }
   if (val.length > 10) {
@@ -32,6 +43,9 @@ var sub3 = function (val) {
 }
 
 var getClassTime = function (course){
+  if (course.length == 0 || course == undefined || course == null) {
+    return;
+  }
   var timeList2 = {
     "01": { start: "0800", end: "0845" },
     "02": { start: "0850", end: "0935" },
@@ -54,8 +68,14 @@ var getClassTime = function (course){
 }
 
 var getNowClass = function (list){
+  if(null == list) return
   var now = getDate()
-  var todayClass = list[now.getDay() - 1]
+  var todayClass = null
+  if (now.getDay()>0){
+    todayClass = list[now.getDay() - 1]
+  }else if(now.getDay()==0){
+    todayClass = list[6]
+  }
   var hour = now.getHours()
   var minute = now.getMinutes()
   var nowTime = [hour, minute].map(formatNumber).join('')
@@ -113,6 +133,7 @@ var sliceStr = function (str){
 }
 
 var sliceStr2 = function (str) {
+  if(null == str || "" == str) return;
   if (str.length == 8) {
     return { start: str.slice(1, 3), end: str.slice(4, 6) }
   } else if (str.length == 11) {
@@ -134,6 +155,7 @@ var formatNumber = function (n){
 module.exports.sub = sub;
 module.exports.sub2 = sub2;
 module.exports.sub3 = sub3;
+module.exports.sub4 = sub4;
 module.exports.getNowClass = getNowClass;
 module.exports.formatNumber = formatNumber;
 module.exports.sliceStr = sliceStr;

@@ -22,8 +22,21 @@ Page({
     informationList: [],
     unReadList: [],
     unReadTitle: "",
-    unReadTime: ""
+    unReadTime: "",
+    isShowDetail: false
   },
+
+  showDetail: function (e) {
+    this.setData({
+      isShowDetail: true
+    })
+  },
+  hideDetail: function () {
+    this.setData({
+      isShowDetail: false
+    })
+  },
+
   idHandle: function(e){
     this.setData({
       jwid: e.detail.value
@@ -113,13 +126,6 @@ Page({
   },
   onLoad: function () {
     var that = this
-    wx.setNavigationBarTitle({
-      title: '北理珠微校园',
-    })
-    wx.setNavigationBarColor({
-      frontColor: '#ffffff',
-      backgroundColor: '#2da0fd',
-    })
     wx.showLoading({
       title: '登录小程序中',
     })

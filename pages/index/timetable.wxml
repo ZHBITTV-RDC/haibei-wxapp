@@ -55,7 +55,7 @@
     </view>
     <view class="courseDetailItem">
       <view class="courseDetailTitle"><text>课室：</text></view>
-      <view class="courseDetailValue"><text>{{tools.sub3(detail.courseLocation)}}</text></view>
+      <view class="courseDetailValue" wx:if="{{null!=detail.courseLocation}}"><text>{{tools.sub3(detail.courseLocation)}}</text></view>
     </view>
     <view class="courseDetailItem">
       <view class="courseDetailTitle"><text>节数：</text></view>
@@ -63,7 +63,7 @@
     </view>
     <view class="courseDetailItem">
       <view class="courseDetailTitle"><text>时间：</text></view>
-      <view class="courseDetailValue"><text>{{tools.getClassTime(detail)}}</text></view>
+      <view class="courseDetailValue" wx:if="{{null!=detail.courseTime}}"><text>{{tools.getClassTime(detail)}}</text></view>
     </view>
     <view class="courseDetailItem">
       <view class="courseDetailTitle"><text>周数：</text></view>
