@@ -1,0 +1,15 @@
+<!-- 上标 -->
+<view class='topLogo'>
+  <image src='/img/up.png' style='width:72rpx;height:110rpx;'></image>
+</view>
+<block wx:for='{{phoneList}}' wx:for-item='item' wx:key='index'>
+  <view class='kind contentCenter'>
+    <image src='{{item.logo}}' mode='aspectFit' class='kingLogo'></image>
+  </view>
+  <view wx:for='{{item.phone}}' bindtap='call' data-phone='{{phoneItem.phone}}' wx:key='index' wx:for-item='phoneItem' class='phone contentCenter'>
+    {{phoneItem.name}}: {{phoneItem.phone}}
+  </view>
+</block>
+<view class='bottomLogo'>
+  <image src='/img/down.png' style='width:72rpx;height:110rpx;'></image>
+</view>

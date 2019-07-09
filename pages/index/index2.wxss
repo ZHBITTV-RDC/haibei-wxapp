@@ -197,7 +197,7 @@
 .functionView{
   /* background-color: royalblue; */
   width: 100%;
-  height: 600rpx;
+  /* height: 600rpx; */
 }
 .functionItemView{
   /* background-color: rosybrown; */

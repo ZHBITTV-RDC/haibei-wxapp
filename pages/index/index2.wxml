@@ -75,7 +75,7 @@
       </view>
     </view>
   </view>
-  <view class='tipInfoItemOutView' bindtap='showDetail'>
+  <view class='tipInfoItemOutView'>
     <view class='tipInfoItemView'>
       <view class='tipItem'>
         <view class='tipTitle' style='color:black;'>正在上课</view>
@@ -194,6 +194,14 @@
       电子校园卡
     </view>
   </view>
+  <view class='functionItemView' bindtap='tip' data-needbind='true' data-function='../lost/lost'>
+    <view class='functionIconView'>
+      <image src='../../img/lost.svg' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      失物招领
+    </view>
+  </view>
   <view class='functionItemView' bindtap='openFunction' data-needbind='false' data-function='bus'>
     <view class='functionIconView'>
       <image src='../../img/bus.svg' class='functionIcon'></image>
@@ -202,20 +210,29 @@
       沃尔玛·华发
     </view>
   </view>
-    <view class='functionItemView' bindtap='openUrl' data-url='https://mp.weixin.qq.com/s/KXi6vC1PPgbHxXoXy6xVmQ'>
+  <view class='functionItemView' bindtap='openFunction' data-needbind='false' data-function='phone'>
     <view class='functionIconView'>
-      <image src='../../img/contact.svg' class='functionIcon'></image>
+      <image src='../../img/phone.svg' class='functionIcon'></image>
     </view>
     <view class='functionNameView'>
-      商务合作
+      常用电话
     </view>
   </view>
-  <view class='functionItemView' bindtap='openFunction' data-needbind='false' data-function='advance'>
+  <view class='functionItemView' style='position:relative'>
     <view class='functionIconView'>
       <image src='../../img/advance.svg' class='functionIcon'></image>
     </view>
     <view class='functionNameView'>
-      投诉建议
+      意见反馈
+    </view>
+    <button style='width:100%;height:100%;z-index:100;position:absolute;top:0;left:0;border:none;' open-type='feedback' plain='true'></button>
+  </view>
+  <view class='functionItemView' bindtap='openUrl' data-url='https://mp.weixin.qq.com/s/KXi6vC1PPgbHxXoXy6xVmQ'>
+    <view class='functionIconView'>
+      <image src='http://haibei.cdn.yuyisoft.net/logo.png' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      商务合作
     </view>
   </view>
 </scroll-view>

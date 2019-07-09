@@ -1,7 +1,9 @@
 {
   "pages": [
     "pages/index/index2",
-    "pages/index/advance",
+    "pages/index/phone",
+
+    
     "pages/index/message",
     "pages/index/exam",
     "pages/index/bus",
@@ -9,11 +11,27 @@
     "pages/index/timetable",
     "pages/index/score",
     "pages/index/index",
-    "pages/logs/logs",
     "pages/index/schedule",
     "pages/index/lecture",
     "pages/index/web",
     "pages/index/card"
+  ],
+  "subpackages": [
+    {
+      "root": "lost",
+      "pages": [
+        "pages/add",
+        "pages/lost",
+        "pages/mobile",
+        "pages/view"
+      ]
+    },
+    {
+      "root": "notice",
+      "pages": [
+        "pages/index"
+      ]
+    }
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -24,5 +42,10 @@
   "navigateToMiniProgramAppIdList": [
     "wx0d1dba6576a9771d"
   ],
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于发布失物招领信息"
+    }
+  }
 }

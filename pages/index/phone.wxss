@@ -1,0 +1,28 @@
+page{
+  background-color: #faf1ca;
+}
+/* 上标 */
+.topLogo{
+  margin-top: 20rpx;
+  margin-left: 50rpx;
+}
+.kind{
+  width: 100%;
+
+}
+.kingLogo{
+  height: 50rpx;
+}
+.phone{
+  color: #173a56;
+  width: 100%;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  font-size: 35rpx;
+}
+/* 下标 */
+.bottomLogo{
+  margin-top: 20rpx;
+  margin-right: 50rpx;
+  float: right;
+}

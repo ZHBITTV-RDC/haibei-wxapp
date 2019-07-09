@@ -30,7 +30,9 @@
         <view class='lectureTime'>{{lectureItem.time}}</view>
       </view>
       <view class='lectureRight'>
-        <view class='lectureResult {{lectureItem.hasPass?"pass":"notPass"}}'>{{lectureItem.hasPass?"通过":"不通过"}}</view>
+        <view class='lectureResult pass' wx:if="{{lectureItem.hasPass == 1}}">通过</view>
+        <view class='lectureResult notPass' wx:if="{{lectureItem.hasPass == -1}}">不通过</view>
+        <view class='lectureResult wait' wx:if="{{lectureItem.hasPass == 0}}">待审核</view>
       </view>
       <view class='lineView' wx:if="{{index+1 < lectureList.length}}">
         <view class='line'></view>

@@ -19,7 +19,7 @@
 
     <view class='table_main'>
       <view class='td' style='width:40px;background-color:white;'>
-        <view class="cell_label centerclass">寒假</view>
+        <view class="cell_label centerclass">{{longHolidayName}}</view>
       </view>
 
       <view class='td'  wx:key="index" wx:for="{{longHoliday}}" wx:for-item="col" style='background-color:rgb(203,255,204)'>

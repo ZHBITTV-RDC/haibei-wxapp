@@ -47,6 +47,13 @@ Page({
       jwpwd: e.detail.value
     })
   },
+  tip: function (e){
+    wx.showModal({
+      title: '提示',
+      content: '此功能仍在开发中，敬请期待',
+      showCancel: false
+    })
+  },
   getHwInfo: function(){
     var that = this
     that.setData({
@@ -110,6 +117,7 @@ Page({
           that.getHwInfo()
           that.getTimetable()
           that.getInformation()
+          that.getJwNoticeDetail()
         }
       },
       fail: function () {
@@ -121,6 +129,20 @@ Page({
       },
       complete: function () {
         wx.hideLoading()
+      }
+    })
+  },
+  getJwNoticeDetail: function() {
+    var that = this
+    wx.request({
+      url: getApp().globalData.requestUrl + 'api.php',
+      data: {
+        accessToken: that.data.accessToken,
+        method: "getJwNoticeDetail"
+      },
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
       }
     })
   },
@@ -414,6 +436,7 @@ Page({
           that.getHwInfo()
           that.getTimetable()
           that.getInformation()
+
         }else{
           wx.showModal({
             title: '绑定失败',

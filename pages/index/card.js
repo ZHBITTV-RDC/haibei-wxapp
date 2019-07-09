@@ -312,7 +312,7 @@ Page({
           }else{
             wx.showModal({
               title: '自动填写手机号失败',
-              content: res.data.reason,
+              content: e.data.reason,
               showCancel: false
             })
           }

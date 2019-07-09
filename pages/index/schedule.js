@@ -37,7 +37,8 @@ Page({
         that.setData({
           data:res.data.xiaoliData,
           longHoliday: res.data.longHolidayData,
-          tips: res.data.tips
+          tips: res.data.tips,
+          longHolidayName: res.data.longHolidayName
         })
       }
     })

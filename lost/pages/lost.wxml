@@ -1,0 +1,34 @@
+<!--index.wxml-->
+<view class="container">
+<view class="weui-tab" style='position:fixed;' >
+    <view style='width:100%;padding-bottom:20rpx;background-color:#2da0fd;'>
+      <input style='width:90%;margin-left:5%;background-color:white;border-radius:50rpx;padding-top:10rpx;padding-bottom:10rpx;text-align: center;color:grey;' placeholder='丢失的物品/姓名/学号'></input>
+    </view>
+    <view class="weui-navbar">
+        <block wx:for-items="{{tabs}}" wx:key="{{index}}">
+            <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                <view class="weui-navbar__title">{{item}}</view>
+            </view>
+        </block>
+    </view>
+    <view class="weui-tab__panel">
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+            <include src="item.wxml" />
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+            <include src="item.wxml" />
+        </view>
+    </view>
+</view>
+
+
+<view hidden="{{hidden}}" class="loading">
+  <view class="loadingImg"><image src="/lost/img/loading.gif" mode="aspectFill"></image></view>
+  <view class="loadingTxt">..加载中..</view>
+</view>
+
+<view class="displayNo" hidden="{{display}}">
+  <image src="/lost/img/Noline.png" mode="widthFix"></image>
+</view>
+
+</view>
