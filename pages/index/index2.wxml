@@ -26,6 +26,7 @@
       </view>
       <view class='bindButtonView'>
         <view class='bindButton' bindtap='bindStudent'>绑定</view>
+        <view class='bindButton' style="margin-left:10rpx;" bindtap='bindStudent'>我是新生</view>
       </view>
     </view>
     <view class='bindView' wx:if='{{hasBind}}'>
@@ -50,7 +51,24 @@
     </view>
   </view>
 </view>
-
+<view class="tipInfoView" style="height:190rpx;">
+  <view class='tipInfoItemOutView' style="width:100%;">
+    <view class='tipInfoItemView'>
+      <view style='width:70%;float:left;'>
+        <view class="termOpenTitle"><text>距离开学还有</text></view>
+        <view class="termOpenTime"><text>注册日期：{{termOpenDate}}</text></view>
+        <view class="termOpenTime"><text>注册位置：明德楼</text></view>
+        <view class="termOpenTime"><text>点击可以打开导航哦</text></view>
+      </view>
+      <view style="width:30%;float:left;position:relative;height:100%;" class="contentCenter">
+        <image src="/img/calendar.svg" style="width:160rpx;height:160rpx;"></image>
+        <view style="position:absolute;width:100%;height:85%;margin-top:15%;z-indent:2;left:0;top:0;font-size:40rpx;color:rgb(112, 112, 112);"  class="contentCenter">
+                13天
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
 <view class="tipInfoView" wx:if='{{hasBind}}'>
   <view class='tipInfoItemOutView'>
     <view class='tipInfoItemView'>
@@ -194,6 +212,14 @@
       电子校园卡
     </view>
   </view>
+  <view class='functionItemView' bindtap='openFunction' data-needbind='false' data-function='navigation'>
+    <view class='functionIconView'>
+      <image src='../../img/navigation.svg' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      校园导航
+    </view>
+  </view>
   <view class='functionItemView' bindtap='tip' data-needbind='true' data-function='../lost/lost'>
     <view class='functionIconView'>
       <image src='../../img/lost.svg' class='functionIcon'></image>
@@ -227,7 +253,7 @@
     </view>
     <button style='width:100%;height:100%;z-index:100;position:absolute;top:0;left:0;border:none;' open-type='feedback' plain='true'></button>
   </view>
-  <view class='functionItemView' bindtap='openUrl' data-url='https://mp.weixin.qq.com/s/KXi6vC1PPgbHxXoXy6xVmQ'>
+  <view class='functionItemView' bindtap='openUrl' data-url='https://mp.weixin.qq.com/s/ISFzz-j-IdIvJE4NUmROzw'>
     <view class='functionIconView'>
       <image src='http://haibei.cdn.yuyisoft.net/logo.png' class='functionIcon'></image>
     </view>

@@ -18,9 +18,10 @@ App({
   },
   globalData: {
     userInfo: null,
-    // requestUrl: 'https://haibei.yuyisoft.net/',
-    requestUrl: 'http://weixiaoyuan.test/',
+    requestUrl: 'https://haibei.yuyisoft.net/',
+    // requestUrl: 'http://127.0.0.1:8082/',
     semesterList: [
+      { id: "2019-2020-1", name: "2019-2020学年第一学期" },
       { id: "2018-2019-2", name: "2018-2019学年第二学期" },
       { id: "2018-2019-1", name: "2018-2019学年第一学期" },
       { id: "2017-2018-2", name: "2017-2018学年第二学期" },

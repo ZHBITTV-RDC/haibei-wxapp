@@ -107,7 +107,8 @@ Page({
         }
         that.setData({
           accessToken: res.data.accessToken,
-          additionFunction: res.data.additionFunction
+          additionFunction: res.data.additionFunction,
+          termOpenDate: res.data.termOpenDate
         })
         if (res.data.hasBind == 1) {
           that.setData({

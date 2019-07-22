@@ -264,3 +264,16 @@
   align-items: center;
   justify-content: center;
 }
+
+/* 开学倒计时 */
+.termOpenTitle{
+  font-size:40rpx;
+  padding-top: 10rpx;
+  margin-left: 20rpx;
+  color: rgb(112, 112, 112);
+}
+.termOpenTime{
+  color:rgb(184, 184, 184);
+  font-size:28rpx;
+  margin-left: 20rpx;
+}
