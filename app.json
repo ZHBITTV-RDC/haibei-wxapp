@@ -31,6 +31,12 @@
       "pages": [
         "pages/index"
       ]
+    },
+    {
+      "root": "new",
+      "pages": [
+        "pages/index"
+      ]
     }
   ],
   "window": {
@@ -40,7 +46,8 @@
     "navigationBarTextStyle": "black"
   },
   "navigateToMiniProgramAppIdList": [
-    "wx0d1dba6576a9771d"
+    "wx0d1dba6576a9771d",
+    "wx6885acbedba59c14"
   ],
   "sitemapLocation": "sitemap.json",
   "permission": {

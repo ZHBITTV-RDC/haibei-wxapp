@@ -36,7 +36,14 @@ Page({
       isShowDetail: false
     })
   },
-
+  newStudent: function(e){
+    this.setData({
+      navigateToNewStudentBind: true
+    })//设置跳转的页面是绑定新生页面
+    wx.navigateTo({
+      url: '/new/pages/index?accessToken=' + this.data.accessToken ,
+    })
+  },
   idHandle: function(e){
     this.setData({
       jwid: e.detail.value
@@ -85,6 +92,31 @@ Page({
       }
     })
   },
+  unBindNewStudent: function(){  //取消绑定新生信息
+    var that = this
+    wx.request({
+      url: getApp().globalData.requestUrl + 'newStudent.php',
+      data: {
+        accessToken: that.data.accessToken,
+        method: 'unBind'
+      },
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function(){
+        wx.showModal({
+          title: '解绑新生数据成功',
+          content: '恭喜你加入北理珠！！！',
+          showCancel: false
+        })
+        that.setData({
+          newStudentInfo: null,
+          hasBindNewStudent: false
+        })
+      }
+    })
+  },
   loginSystem: function(code){
     var that = this
     wx.request({
@@ -108,8 +140,10 @@ Page({
         that.setData({
           accessToken: res.data.accessToken,
           additionFunction: res.data.additionFunction,
-          termOpenDate: res.data.termOpenDate
+          registerInfo: res.data.registerInfo,
+          openNewStudentRegister: res.data.openNewStudentRegister
         })
+    
         if (res.data.hasBind == 1) {
           that.setData({
             hasBind: true,
@@ -118,7 +152,11 @@ Page({
           that.getHwInfo()
           that.getTimetable()
           that.getInformation()
-          that.getJwNoticeDetail()
+          //that.getJwNoticeDetail()
+        }else{
+          if (res.data.openNewStudentRegister){
+            that.checkNewStudentBind()
+          }
         }
       },
       fail: function () {
@@ -268,6 +306,13 @@ Page({
     clearInterval(t)
   },
   onShow: function(){
+    if (this.data.navigateToNewStudentBind == true) {  //如果页面是从绑定页面返回的
+      this.checkNewStudentBind()
+      this.setData({
+        navigateToNewStudentBind: false
+      })
+    }
+    //如果已经绑定则获取通知信息
     if(!this.data.hasBind) return
     var that = this
     const list = wx.getStorageSync('information')
@@ -286,19 +331,30 @@ Page({
     that.setData({
       unReadList: unReadList
     })
-    // var index = 1
-    // t = setInterval(function () {
-    //   if (unReadList.length > 0) {
-    //     that.setData({
-    //       unReadTitle: unReadList[index].title,
-    //       unReadTime: unReadList[index].time
-    //     })
-    //     index++
-    //     if (index >= unReadList.length) {
-    //       index = 0
-    //     }
-    //   }
-    // }, 3000)
+  },
+  checkNewStudentBind: function (){
+    if (this.data.hasBind) return; //如果已经绑定了系统则忽略
+    var that = this
+    wx.request({
+      url: getApp().globalData.requestUrl + 'newStudent.php',
+      data: {
+        accessToken: that.data.accessToken,
+        method: 'check'
+      },
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function(res){
+        if(res.data.status == 1){  //如果已绑定新生信息
+          that.setData({
+            newStudentInfo: res.data,
+            hasBindNewStudent: true,
+            registerInfo: res.data.registerInfo
+          })
+        }
+      }
+    })
   },
   getTimetable: function () {
     var that = this
@@ -451,13 +507,34 @@ Page({
       }
     })
   },
-
+  checkEMS: function(e){
+    if (e.currentTarget.dataset.ems != "录取通知书未发出"){
+      wx.navigateToMiniProgram({
+        appId: 'wx6885acbedba59c14',
+        path: 'pages/result/result?nu=' + e.currentTarget.dataset.ems +'&querysource=third_xcx'
+      })
+    }else{
+      wx.showModal({
+        title: '暂无法查询',
+        content: '录取通知书暂未发出，无法进行快递查询',
+        showCancel: false
+      })
+    }
+  },
   onPullDownRefresh:function(){
     this.getInformation()
   },
 
   openFunction:function(e){
     var that = this
+    if (e.currentTarget.dataset.needbind == "true" && that.data.hasBindNewStudent) {
+      wx.showModal({
+        title: '功能暂不可用',
+        content: '此功能需要您绑定教务账号才能使用哦，新生请点击[我已入学]按钮并重新绑定教务系统哦',
+        showCancel: false
+      })
+      return
+    }
     if (e.currentTarget.dataset.needbind == "true" && !that.data.hasBind){
       wx.showModal({
         title: '未绑定学号',
@@ -469,5 +546,11 @@ Page({
     wx.navigateTo({
       url: './' + e.currentTarget.dataset.function + '?accessToken=' + that.data.accessToken,
     })
+  },
+  onShareAppMessage: function () {
+    return {
+      title: '口袋北理-北理珠学生必备校园小程序',
+      path: '/pages/index/index2'
+    }
   }
 })

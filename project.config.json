@@ -42,7 +42,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
@@ -55,6 +55,13 @@
 					"id": -1,
 					"name": "新建失物",
 					"pathName": "lost/pages/add",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "新生录取",
+					"pathName": "new/pages/index",
 					"scene": null
 				}
 			]
