@@ -102,7 +102,6 @@ Page({
         }
       }
     }
-    console.log(marker)
     this.setData({
       currentIndex: currentIndex,
       marker: marker
@@ -161,6 +160,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '北理珠校内导航-再也不怕在校园迷路',
+      path: '/pages/index/index2'
+    }
   }
 })

@@ -58,6 +58,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '北理珠常用电话-再也不用翻找电话本',
+      path: '/pages/index/index2'
+    }
   }
 })

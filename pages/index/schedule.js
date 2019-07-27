@@ -48,5 +48,11 @@ Page({
     wx.navigateTo({
       url: './timetable?accessToken='+t.data.accessToken + "&weekIndex="+e.currentTarget.dataset.week,
     })
+  },
+  onShareAppMessage: function () {
+    return {
+      title: '口袋北理-北理珠学生必备校园小程序',
+      path: '/pages/index/index2'
+    }
   }
 })

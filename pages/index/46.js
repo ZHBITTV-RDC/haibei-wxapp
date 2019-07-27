@@ -221,6 +221,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '口袋北理-北理珠学生必备校园小程序',
+      path: '/pages/index/index2'
+    }
   }
 })
