@@ -1,0 +1,47 @@
+<view class="top">
+  <scroll-view class="menu" scroll-x="true">
+    <view style="height:100%;display:flex;">
+      <block wx:for="{{navi}}" wx:key="index" wx:for-item="kind" wx:for-index="kindIndex">
+        <view-item bindtap="changeKind" data-index="{{kindIndex}}" class="menuItem contentCenter {{currentIndex==kindIndex?'select':''}}"><text>{{kind.title}}</text></view-item>
+      </block>
+    </view>
+  </scroll-view>
+</view>
+<map class="map" style="height:{{showDetail?'50%':'87%'}};"  enable-satellite="{{satellite}}" subkey="UABBZ-FHW3S-H5UOO-6ET5G-Y2ONH-2JB7C"  show-location="true" longitude="{{mapData.longitude}}" latitude="{{mapData.latitude}}" scale="15" markers="{{marker.length>0?marker:navi[currentIndex].list}}" bindmarkertap="showMarker">
+  <cover-view class="controls">
+    <cover-view class="location contentCenter" bindtap="showSatellite">
+      <cover-image class="img" src="http://haibei.cdn.yuyisoft.net/wxapp/sat.png" />
+    </cover-view>
+  </cover-view>
+</map>
+<view class="devide contentCenter" bindtap="showhide">
+  共有{{navi[currentIndex].list.length}}个{{navi[currentIndex].title}}
+  <image src="{{showDetail?'/img/show.svg':'/img/hide.svg'}}" class="showhide"></image>
+</view>
+<scroll-view class="detail" scroll-y wx:if="showDetail" scroll-into-view="{{rollTo}}">
+  <block wx:for="{{navi[currentIndex].list}}" wx:key="index" wx:for-item="item">
+    <view class="item" bindtap="showLocation" id="{{item.id}}" data-longitude="{{item.longitude}}" data-latitude="{{item.latitude}}">
+      <view class="itemLeft contentCenter">
+        <image class="pic" src="{{item.img}}"></image>
+      </view>
+      <view class="itemMiddle verticalCenter">
+        {{item.title}}
+      </view>
+      <view class="itemRight contentCenter">
+        <image class="navi" src="/img/navi.svg" bindtap="showNavigation" data-longitude="{{item.longitude}}" data-latitude="{{item.latitude}}" data-title="{{item.title}}"></image>
+      </view>
+    </view>
+    <block wx:for="{{item.detail}}" wx:if="{{currentIndex==0}}" wx:key="index2" wx:for-item="itemChild">
+      <view class="itemChild" bindtap="showLocation" data-longitude="{{itemChild.longitude}}" data-latitude="{{itemChild.latitude}}">
+        <view class="itemLeft contentCenter">
+        </view>
+        <view class="itemMiddle verticalCenter">
+          {{itemChild.title}}
+        </view>
+        <view class="itemRight contentCenter">
+          <image class="navi" src="/img/navi.svg" bindtap="showNavigation" data-longitude="{{itemChild.longitude}}" data-latitude="{{itemChild.latitude}}" data-title="{{itemChild.title}}"></image>
+        </view>
+      </view>
+    </block>
+  </block>
+</scroll-view>

@@ -77,6 +77,9 @@ page{
 .notPass{
   background-color: rgb(255, 94, 0);
 }
+.wait{
+  background-color: rgb(255, 208, 0);
+}
 .lectureSmall{
   height: 110rpx;
   font-size: 33rpx;

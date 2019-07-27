@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+  },
+  "navigationBarTitleText": "录取查询",
+  "navigationBarBackgroundColor": "#2da0fd",
+  "navigationBarTextStyle": "white",
+  "disableScroll": true
+}

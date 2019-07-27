@@ -312,7 +312,7 @@ Page({
           }else{
             wx.showModal({
               title: '自动填写手机号失败',
-              content: res.data.reason,
+              content: e.data.reason,
               showCancel: false
             })
           }
@@ -323,6 +323,12 @@ Page({
           })
         }
       })
+    }
+  },
+  onShareAppMessage: function () {
+    return {
+      title: '口袋北理-北理珠学生必备校园小程序',
+      path: '/pages/index/index2'
     }
   }
 })

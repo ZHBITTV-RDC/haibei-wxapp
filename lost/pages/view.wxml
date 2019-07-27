@@ -1,0 +1,50 @@
+<!--pages/view/view.wxml-->
+<import src="../../template/loading" />
+
+<view class="containes">
+
+<view class="viewMain">
+
+	<view class="UserName">
+	<view class="UserPic">
+	  <image src="{{headimgurl}}"></image>
+	  <text>{{nickname}}</text>
+	</view>
+	<view class="UserDate">
+	  <text>{{datetime}}</text>
+	</view>
+	</view>
+
+	<view class="content">
+	<view class="content-tel" bindtap="callmeTap">
+	  <image src="/img/lost/tel.png" mode="widthFix"></image>
+	  <text>联系电话 {{mobile}} 【已认证】</text>
+	</view>
+
+	<view class="content-a">{{content}}</view>
+	<view class="content-b" wx:if="{{photo != null}}">
+		<image class="poster" src="{{photo}}" data-src="{{photo}}" bindtap="previewImage" mode="widthFix" style="width: {{windowWidth}}px;"></image>
+	</view>
+	</view>
+
+  <view class="Guanzhu">
+        <label>-------- 匆匆过客 --------</label>
+        <block url="" wx:for="{{gzList}}" wx:key="" class="gzList" wx:for-item="g">
+            <image class="gzAuthor" src="{{g.avatar}}" mode="widthFix"></image>
+        </block>
+  </view>
+
+</view>
+
+<!-- 获取发布位置 -->
+<view class='getGps'>  
+    <text bindtap='openMaps' data-long="{{views.long}}" data-lat="{{views.lat}}" data-address="{{views.address}}">发布于：{{views.address}}</text>
+    <image src="/img/lost/map.png" class="mapIco" mode="widthFix"></image>
+</view>
+<view class="mbTxing">
+  <text>【温馨提示】接到陌生人来电或者短信时，凡涉及到钱财交易，广大网友请提高警惕，谨防上当受骗！</text>
+</view>
+<view class='zhuan'>
+  <button open-type="share">让大家帮忙找一找</button>
+</view>
+</view>

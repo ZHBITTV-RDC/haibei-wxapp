@@ -6,6 +6,7 @@
     </view>
     <view class="userNicknameView">
       <text class="userNickname" wx:if='{{hasBind}}'>{{classData.studentName}}</text>
+      <text class="userNickname" wx:elif='{{hasBindNewStudent}}'>{{newStudentInfo.studentName}}</text>
       <text class="userNickname" wx:elif='{{hasUserInfo}}'>{{userInfo.nickName}}</text>
       <text class="userNickname" wx:else>未授权</text>
     </view>
@@ -14,7 +15,7 @@
     </view>
   </view>
   <view class='studentInfoView'>
-    <view class='bindView' wx:if='{{!hasBind}}'>
+    <view class='bindView' wx:if='{{!hasBind && !hasBindNewStudent}}'>
       <view class='title'>
         教务系统账号
       </view>
@@ -26,9 +27,10 @@
       </view>
       <view class='bindButtonView'>
         <view class='bindButton' bindtap='bindStudent'>绑定</view>
+        <view class='bindButton' style="margin-left:10rpx;" wx:if="{{openNewStudentRegister}}" bindtap='newStudent'>我是新生</view>
       </view>
     </view>
-    <view class='bindView' wx:if='{{hasBind}}'>
+    <view class='bindView' wx:if='{{hasBind && !hasBindNewStudent}}'>
       <view class='title'>
         教务系统账号
       </view>
@@ -48,10 +50,47 @@
         <view class='bindButton' bindtap='unBindStudent'>解绑</view>
       </view>
     </view>
+    <view class='bindView' wx:if='{{!hasBind && hasBindNewStudent}}'>
+      <view class='title'>
+        新生录取信息
+      </view>
+      <view class='infoView'>
+        <view class='infoTitle'>学院:</view>
+        <view class='infoContent'>{{newStudentInfo.college}}</view>
+      </view>
+      <view class='infoView'>
+        <view class='infoTitle'>专业:</view>
+        <view class='infoContent'>{{newStudentInfo.major}}</view>
+      </view>
+      <view class='infoView'>
+        <view class='infoTitle'>通知书:</view>
+        <view class='infoContent' bindtap="checkEMS" data-ems="{{newStudentInfo.ems}}">{{newStudentInfo.ems}}{{newStudentInfo.ems!="录取通知书未发出"?"（点击可查询）":""}}</view>
+      </view>
+      <view class='bindButtonView'>
+        <view class='bindButton' bindtap='unBindNewStudent'>我已入学</view>
+      </view>
+    </view>
   </view>
 </view>
-
-<view class="tipInfoView" wx:if='{{hasBind}}'>
+<view class="tipInfoView" style="height:190rpx;" wx:if='{{registerInfo.remain > 0}}'>
+  <view class='tipInfoItemOutView' style="width:100%;">
+    <view class='tipInfoItemView'>
+      <view style='width:70%;float:left;'>
+        <view class="termOpenTitle"><text>距离开学还有</text></view>
+        <view class="termOpenTime"><text>注册日期：{{registerInfo.registerTime}}</text></view>
+        <view class="termOpenTime"><text>注册位置：{{registerInfo.registerLocation}}</text></view>
+        <view class="termOpenTime" bindtap='openFunction' data-needbind='false' data-function='navigation'><text>点击可以打开导航哦</text></view>
+      </view>
+      <view style="width:30%;float:left;position:relative;height:100%;" class="contentCenter">
+        <image src="/img/calendar.svg" style="width:160rpx;height:160rpx;"></image>
+        <view style="position:absolute;width:100%;height:85%;margin-top:15%;z-indent:2;left:0;top:0;font-size:40rpx;color:rgb(112, 112, 112);"  class="contentCenter">
+                {{registerInfo.remain}}天
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="tipInfoView" wx:if='{{hasBind && registerInfo.remain < 0}}'>
   <view class='tipInfoItemOutView'>
     <view class='tipInfoItemView'>
       <view class='tipItem'>
@@ -75,7 +114,7 @@
       </view>
     </view>
   </view>
-  <view class='tipInfoItemOutView' bindtap='showDetail'>
+  <view class='tipInfoItemOutView'>
     <view class='tipInfoItemView'>
       <view class='tipItem'>
         <view class='tipTitle' style='color:black;'>正在上课</view>
@@ -194,6 +233,22 @@
       电子校园卡
     </view>
   </view>
+  <view class='functionItemView' bindtap='openFunction' data-needbind='false' data-function='navigation'>
+    <view class='functionIconView'>
+      <image src='../../img/navigation.svg' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      校园导航
+    </view>
+  </view>
+  <view class='functionItemView' bindtap='tip' data-needbind='true' data-function='../lost/lost'>
+    <view class='functionIconView'>
+      <image src='../../img/lost.svg' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      失物招领
+    </view>
+  </view>
   <view class='functionItemView' bindtap='openFunction' data-needbind='false' data-function='bus'>
     <view class='functionIconView'>
       <image src='../../img/bus.svg' class='functionIcon'></image>
@@ -202,20 +257,29 @@
       沃尔玛·华发
     </view>
   </view>
-    <view class='functionItemView' bindtap='openUrl' data-url='https://mp.weixin.qq.com/s/KXi6vC1PPgbHxXoXy6xVmQ'>
+  <view class='functionItemView' bindtap='openFunction' data-needbind='false' data-function='phone'>
     <view class='functionIconView'>
-      <image src='../../img/contact.svg' class='functionIcon'></image>
+      <image src='../../img/phone.svg' class='functionIcon'></image>
     </view>
     <view class='functionNameView'>
-      商务合作
+      常用电话
     </view>
   </view>
-  <view class='functionItemView' bindtap='openFunction' data-needbind='false' data-function='advance'>
+  <view class='functionItemView' style='position:relative'>
     <view class='functionIconView'>
       <image src='../../img/advance.svg' class='functionIcon'></image>
     </view>
     <view class='functionNameView'>
-      投诉建议
+      意见反馈
+    </view>
+    <button style='width:100%;height:100%;z-index:100;position:absolute;top:0;left:0;border:none;' open-type='feedback' plain='true'></button>
+  </view>
+  <view class='functionItemView' bindtap='openUrl' data-url='https://mp.weixin.qq.com/s/ISFzz-j-IdIvJE4NUmROzw'>
+    <view class='functionIconView'>
+      <image src='http://haibei.cdn.yuyisoft.net/logo.png' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      商务合作
     </view>
   </view>
 </scroll-view>

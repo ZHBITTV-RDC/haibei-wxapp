@@ -1,0 +1,17 @@
+<view class="zr">
+  <!-- <image class="bg" src="http://haibei.cdn.yuyisoft.net/wxapp/bg.jpg"></image> -->
+  <view class="water">
+      <view class="water-c">
+          <view class="water-1"> </view>
+          <view class="water-2"> </view>
+      </view>
+  </view>
+  <view class="bind">
+    <view class="inputView contentCenter">
+      <text class="title">专业查询:</text>
+      <input class="ksh" bindinput="ksh" placeholder="请输入你的考号"></input>
+    </view>
+    <button class="check" bindtap="check">点击查询</button>
+  </view>
+</view>
+<view class="footer">Power By 海贝TV研发部</view>
