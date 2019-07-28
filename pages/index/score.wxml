@@ -30,7 +30,7 @@
       </view>
     </view>
 
-    <view class='scoreItem {{scoreItem.courseName.length>12?"long":"short"}}' wx:for='{{scoreList}}' wx:for-item='scoreItem' wx:key='courseName' wx:if='{{scoreList.length>0}}'>
+    <view class='scoreItem {{scoreItem.courseName.length>12?"long":"short"}}' wx:for='{{scoreList}}' wx:for-item='scoreItem' wx:key='courseName' wx:if='{{scoreList.length>0}}' bindtap='checkScoreDetail' data-id="{{scoreItem.courseId}}" data-result="{{scoreItem.courseResult}}">
       <view class='scoreLeft {{scoreItem.courseName.length>12?"long":"short"}}'>
         <view class='scoreName'>{{scoreItem.courseName}}</view>
         <view class='scoreCredit'>学分:{{scoreItem.courseCredit}}</view>
