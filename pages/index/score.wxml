@@ -30,7 +30,7 @@
       </view>
     </view>
 
-    <view class='scoreItem {{scoreItem.courseName.length>12?"long":"short"}}' wx:for='{{scoreList}}' wx:for-item='scoreItem' wx:key='courseName' wx:if='{{scoreList.length>0}}'>
+    <view class='scoreItem {{scoreItem.courseName.length>12?"long":"short"}}' wx:for='{{scoreList}}' wx:for-item='scoreItem' wx:key='courseName' wx:if='{{scoreList.length>0}}' bindtap='checkScoreDetail' data-id="{{scoreItem.courseId}}" data-name="{{scoreItem.courseName}}" data-result="{{scoreItem.courseResult}}">
       <view class='scoreLeft {{scoreItem.courseName.length>12?"long":"short"}}'>
         <view class='scoreName'>{{scoreItem.courseName}}</view>
         <view class='scoreCredit'>学分:{{scoreItem.courseCredit}}</view>
@@ -43,6 +43,41 @@
       <view class='lineView' wx:if="{{index+1 < scoreList.length}}">
         <view class='line'></view>
       </view>
+    </view>
+  </view>
+</view>
+<view class="shadow" style='display: {{isShowDetail?"flex":"none"}}' bindtap='hideDetail'>
+  <view class="courseDetail">
+    <view class="courseDetailHead">
+      <view class="courseDetailName"><text>{{detail.courseName}}</text></view>
+    </view>
+    <view class="courseDetailItem" wx:if="{{detail.pscj}}">
+      <view class="courseDetailTitle"><text>平时成绩：</text></view>
+      <view class="courseDetailValue"><text>{{detail.pscj}}</text></view>
+    </view>
+    <view class="courseDetailItem" wx:if="{{detail.pscj}}">
+      <view class="courseDetailTitle line2"><text>平时成绩比例：</text></view>
+      <view class="courseDetailValue line2"><text>{{detail.pscjbl}}</text></view>
+    </view>
+    <view class="courseDetailItem" wx:if="{{detail.qzcj}}">
+      <view class="courseDetailTitle"><text>期中成绩：</text></view>
+      <view class="courseDetailValue"><text>{{detail.qzcj}}</text></view>
+    </view>
+    <view class="courseDetailItem" wx:if="{{detail.qzcj}}">
+      <view class="courseDetailTitle line2"><text>期中成绩比例：</text></view>
+      <view class="courseDetailValue line2"><text>{{detail.qzcjbl}}</text></view>
+    </view>
+    <view class="courseDetailItem" wx:if="{{detail.qmcj}}">
+      <view class="courseDetailTitle"><text>期末成绩：</text></view>
+      <view class="courseDetailValue"><text>{{detail.qmcj}}</text></view>
+    </view>
+    <view class="courseDetailItem" wx:if="{{detail.qmcj}}">
+      <view class="courseDetailTitle line2"><text>期末成绩比例：</text></view>
+      <view class="courseDetailValue line2"><text>{{detail.qmcjbl}}</text></view>
+    </view>
+    <view class="courseDetailItem" wx:if="{{detail.zcj}}">
+      <view class="courseDetailTitle"><text>总成绩：</text></view>
+      <view class="courseDetailValue"><text>{{detail.zcj}}</text></view>
     </view>
   </view>
 </view>

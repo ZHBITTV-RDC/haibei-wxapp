@@ -74,6 +74,50 @@ Page({
     })
   },
 
+  checkScoreDetail: function(e){  //查询详细成绩
+    var that = this
+    wx.showLoading({
+      title: '正在查询中',
+    })
+    var data = { 
+      method: 'getGradeDetail', 
+      accessToken: that.data.accessToken,
+      courseId: e.currentTarget.dataset.id,
+      courseResult: e.currentTarget.dataset.result,
+    }
+    wx.request({
+      url: getApp().globalData.requestUrl + 'api.php',
+      data: data,
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        if (res.data.status == 1) {
+          var detail = res.data.detail
+          detail['courseName'] = e.currentTarget.dataset.name
+          that.setData({
+            detail: res.data.detail,
+            isShowDetail: true
+          })
+        } else {
+          wx.showModal({
+            title: '查询成绩失败',
+            content: res.data.reason,
+            showCancel: false
+          })
+        }
+      },
+      complete: res => {
+        wx.hideLoading()
+      }
+    })
+  },
+  hideDetail: function () {
+    this.setData({
+      isShowDetail: false
+    })
+  },
   changeSemester: function(e){
     this.setData({
       index: e.detail.value
