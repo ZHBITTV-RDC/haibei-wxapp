@@ -76,9 +76,9 @@ Page({
 
   checkScoreDetail: function(e){  //查询详细成绩
     var that = this
-    // wx.showLoading({
-    //   title: '正在查询中',
-    // })
+    wx.showLoading({
+      title: '正在查询中',
+    })
     var data = { 
       method: 'getGradeDetail', 
       accessToken: that.data.accessToken,
@@ -94,10 +94,12 @@ Page({
       },
       success: function (res) {
         if (res.data.status == 1) {
-          // that.setData({
-          //   scoreList: res.data.scoreData,
-          //   credit: res.data.credit
-          // })
+          var detail = res.data.detail
+          detail['courseName'] = e.currentTarget.dataset.name
+          that.setData({
+            detail: res.data.detail,
+            isShowDetail: true
+          })
         } else {
           wx.showModal({
             title: '查询成绩失败',
@@ -111,7 +113,11 @@ Page({
       }
     })
   },
-
+  hideDetail: function () {
+    this.setData({
+      isShowDetail: false
+    })
+  },
   changeSemester: function(e){
     this.setData({
       index: e.detail.value
