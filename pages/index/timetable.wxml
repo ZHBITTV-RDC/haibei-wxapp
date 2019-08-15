@@ -42,8 +42,8 @@
               <view class='courseLocation'>{{courseItem.courseLocation}}</view>
           </view>
           <block wx:if='{{!courseItem}}'>
-            <view class='classItem classItemL1'></view>
-            <view class='classItem classItemL1'></view>
+            <view class='classItem classItemL1' style="{{index==6?'position:relative':''}}"><view style="color:gray;position:absolute;bottom:0;" wx:if="{{index==6}}">{{timeList2[index1*2].start}}-{{timeList2[index1*2].end}}</view></view>
+            <view class='classItem classItemL1' style="{{index==6?'position:relative':''}}"><view style="color:gray;position:absolute;bottom:0;" wx:if="{{index==6}}">{{timeList2[index1*2+1].start}}-{{timeList2[index1*2+1].end}}</view></view>
           </block>
       </block>
     </view>

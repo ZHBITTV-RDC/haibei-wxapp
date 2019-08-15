@@ -20,7 +20,23 @@ Page({
       teacherName: null,
       courseTime: null,
       courseTimeDetail: null,
-    }
+    },
+    timeList2:[
+      { start: "08:00", end: "08:45" },
+      { start: "08:50", end: "09:35" },
+      { start: "09:55", end: "10:40" },
+      { start: "10:45", end: "11:30" },
+      { start: "11:40", end: "12:25" },
+      { start: "12:30", end: "13:15" },
+      { start: "14:00", end: "14:45" },
+      { start: "14:50", end: "15:35" },
+      { start: "15:55", end: "16:40" },
+      { start: "16:45", end: "17:30" },
+      { start: "18:40", end: "19:25" },
+      { start: "19:30", end: "20:15" },
+      { start: "20:25", end: "21:10" },
+      { start: "21:15", end: "22:00" },
+    ]
   },
   changeSemester:function(e){
     this.setData({
