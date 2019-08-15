@@ -1,7 +1,7 @@
 /* pages/add/add.wxss */
 page {
-  background-color: #F5F5F5;
-  height: 100%;
+  background-color: white;
+  padding-bottom: 20rpx;
   line-height: 1.6;
 }
 .mbInput{
@@ -26,8 +26,8 @@ page {
 }
 
 .mbBtn .vBtn_ok{
-   border: 0; background: #FF8F2B; color: #fff;
-   margin-top: 30rpx; margin-bottom: 20rpx; border-radius: 100rpx
+   border: 0; background: rgb(255, 125, 125); color: #fff;
+   margin-top: 30rpx; margin-bottom: 20rpx; border-radius: 100rpx;
 }
 
 .mbTxing{
@@ -70,7 +70,12 @@ page {
 
 /* 获取当前位置 */
 .getGps{
-  width: 92%; background: #FCFCFC; border-top: 2rpx #ECECEC solid; padding:3% 4%; font-size: 14px; color: #999;   margin-top: 30rpx;
+  width: 92%; 
+  /* background: #FCFCFC; */
+  border-top: 2rpx #ECECEC solid; 
+  padding:3% 4%;
+  font-size: 14px; 
+  color: #999;
 }
 .getGps label{
   margin-right: 20rpx;
@@ -80,3 +85,28 @@ image.mapIco{
   margin-right: 15rpx
 }
 
+.typeView{
+  height: 100rpx;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn{
+  width: 45%;
+  height: 70rpx;
+  font-size: 34rpx;
+  border-radius: 25rpx;
+}
+.choose{
+  background-color: rgb(255, 125, 125);
+  border: rgb(255, 125, 125) solid 1rpx;
+  color: white;
+}
+.notChoose{
+  background-color: white;
+  color: rgb(94, 76, 76);
+  border: rgb(94, 76, 76) solid 1rpx;
+}

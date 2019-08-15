@@ -1,50 +1,65 @@
 <!--pages/view/view.wxml-->
-<import src="../../template/loading" />
-
 <view class="containes">
 
-<view class="viewMain">
+  <view class="viewMain">
 
-	<view class="UserName">
-	<view class="UserPic">
-	  <image src="{{headimgurl}}"></image>
-	  <text>{{nickname}}</text>
-	</view>
-	<view class="UserDate">
-	  <text>{{datetime}}</text>
-	</view>
-	</view>
+    <view class="UserName">
+      <view class="UserPic">
+        <image src="{{detail.headimgurl}}" mode="scaleToFill"></image>
+        <text>{{detail.nickname}}</text>
+      </view>
+      <view class="UserDate">
+        <text>{{detail.publishTime}}</text>
+      </view>
+    </view>
 
-	<view class="content">
-	<view class="content-tel" bindtap="callmeTap">
-	  <image src="/img/lost/tel.png" mode="widthFix"></image>
-	  <text>联系电话 {{mobile}} 【已认证】</text>
-	</view>
+    <view class="content">
+      <view class="content-tel {{!detail.wechat?'bottom':''}}" style="{{!detail.wechat?'margin-bottom: 40rpx;':''}}" bindtap="callmeTap" wx:if="{{detail.phone}}">
+        <image src="/lost/img/tel.png" mode="widthFix"></image>
+        <text>联系电话 {{detail.mobile}}【点击拨打】</text>
+      </view>
+      <view class="content-tel {{detail.wechat?'bottom':''}}" bindtap="copyWechat" wx:if="{{detail.wechat}}" style="margin-bottom: 40rpx;">
+        <image src="/lost/img/weixin.png" mode="widthFix"></image>
+        <text>联系微信 {{detail.wechat}}【点击复制】</text>
+      </view>
+      <view class="content-a"><text>{{detail.title}}</text></view>
+      <view class="content-c"><text>{{detail.content}}</text></view>
+      <view class="content-b" wx:if="{{detail.photo}}">
+        <image class="poster" src="{{detail.photo}}" data-src="{{detail.photo}}" bindtap="previewImage" mode="widthFix" style="width: {{windowWidth}}px;"></image>
+      </view>
+    </view>
 
-	<view class="content-a">{{content}}</view>
-	<view class="content-b" wx:if="{{photo != null}}">
-		<image class="poster" src="{{photo}}" data-src="{{photo}}" bindtap="previewImage" mode="widthFix" style="width: {{windowWidth}}px;"></image>
-	</view>
-	</view>
-
-  <view class="Guanzhu">
-        <label>-------- 匆匆过客 --------</label>
-        <block url="" wx:for="{{gzList}}" wx:key="" class="gzList" wx:for-item="g">
-            <image class="gzAuthor" src="{{g.avatar}}" mode="widthFix"></image>
-        </block>
   </view>
 
+  <!-- 获取发布位置 -->
+  <view class='getGps'>  
+      <text bindtap='openMaps' data-long="{{detail.longitude}}" data-lat="{{detail.latitude}}" data-address="{{views.address}}">发布于：{{detail.address}}</text>
+      <image src="/lost/img/map.png" class="mapIco" mode="widthFix"></image>
+  </view>
+  <view class="mbTxing">
+    <text>【温馨提示】接到陌生人来电或者短信时，凡涉及到钱财交易，同学们请提高警惕，谨防上当受骗！</text>
+  </view>
+  <view class='zhuan'>
+    <button bindtap="showBtn">让大家帮忙找一找</button>
+  </view>
+  <!-- 海报 -->
+  <view style="position: fixed;left: -500px; bottom: -500px;">
+    <canvas canvas-id="poster" style="width:{{width*0.95}}px;height:{{posterHeight}}px"></canvas>
+  </view>
 </view>
-
-<!-- 获取发布位置 -->
-<view class='getGps'>  
-    <text bindtap='openMaps' data-long="{{views.long}}" data-lat="{{views.lat}}" data-address="{{views.address}}">发布于：{{views.address}}</text>
-    <image src="/img/lost/map.png" class="mapIco" mode="widthFix"></image>
-</view>
-<view class="mbTxing">
-  <text>【温馨提示】接到陌生人来电或者短信时，凡涉及到钱财交易，广大网友请提高警惕，谨防上当受骗！</text>
-</view>
-<view class='zhuan'>
-  <button open-type="share">让大家帮忙找一找</button>
-</view>
+<view class="page-shade" bindtap="closeBtn" hidden="{{!showShare}}"></view>
+<view class="shareView" hidden="{{!showShare}}">
+  <view class="shareChoose">
+    <button open-type="share" style="border:none;background:none;padding-left:0;line-height:1;margin:0;">
+      <view class="shareWechat">
+        <image src="http://cdn2.yuyisoft.net/weixiaoyuan/wechat.png" style="vertical-align: middle;"></image>
+        <view class="textExplain">分享给朋友</view>
+      </view>
+    </button>
+    <view bindtap="downloadQrcode" class="sharePoster">
+      <image src="http://cdn2.yuyisoft.net/weixiaoyuan/post.png" style="vertical-align: middle;"></image>
+      <view class="textExplain">生成分享图片</view>
+    </view>
+  </view>
+  <view bindtap="closeBtn" class="closeBtn">关闭</view>
 </view>

@@ -1,34 +1,58 @@
 <!--index.wxml-->
 <view class="container">
-<view class="weui-tab" style='position:fixed;' >
-    <view style='width:100%;padding-bottom:20rpx;background-color:#2da0fd;'>
-      <input style='width:90%;margin-left:5%;background-color:white;border-radius:50rpx;padding-top:10rpx;padding-bottom:10rpx;text-align: center;color:grey;' placeholder='丢失的物品/姓名/学号'></input>
-    </view>
-    <view class="weui-navbar">
-        <block wx:for-items="{{tabs}}" wx:key="{{index}}">
-            <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
-                <view class="weui-navbar__title">{{item}}</view>
-            </view>
-        </block>
-    </view>
-    <view class="weui-tab__panel">
-        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-            <include src="item.wxml" />
+  <view class="weui-tab" style='position:fixed;' >
+      <view style='width:100%;padding-bottom:20rpx;background-color:#2da0fd;'>
+        <input style='width:90%;margin-left:5%;background-color:white;border-radius:50rpx;padding-top:10rpx;padding-bottom:10rpx;text-align: center;color:grey;' placeholder='丢失的物品/姓名/学号' bindconfirm="search" bindinput="searchInput"></input>
+      </view>
+      <view class="weui-navbar">
+        <view id="1" class="weui-navbar__item {{activeIndex == 1 ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                  <view class="weui-navbar__title">捡到的物品</view>
         </view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-            <include src="item.wxml" />
+        <view id="2" class="weui-navbar__item {{activeIndex == 2 ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                  <view class="weui-navbar__title">丢失的物品</view>
         </view>
-    </view>
+      </view>
+  </view>
 </view>
-
-
-<view hidden="{{hidden}}" class="loading">
+<view class="itemList">
+  <navigator url="view?accessToken={{accessToken}}&id={{item.id}}" wx:key="index" class="item" wx:for="{{list}}">
+    <view class="imgView">
+      <image src="{{item.photo}}" wx:if="{{item.photo}}" class="img"></image>
+      <image src="cloud://haibei-wxapp-spxdn.6861-haibei-wxapp-spxdn/xwqs.png" wx:if="{{!item.photo&&activeIndex==1}}" class="img"></image>
+      <image src="cloud://haibei-wxapp-spxdn.6861-haibei-wxapp-spxdn/swzl.png" wx:if="{{!item.photo&&activeIndex==2}}" class="img"></image>
+    </view>
+    <view class="title">
+      {{item.title}}
+    </view>
+    <view class="author">
+      <view class="avatarView verticalCenter">
+        <image class="avatar" src="{{item.headimgurl}}"></image>
+      </view>
+      <view class="nickname verticalCenter">{{item.nickname}}</view>
+      <view class="time verticalCenter">{{item.datetime}}</view>
+    </view>
+  </navigator>
+</view>
+<view hidden="{{!loadingNewItem}}" class="loading">
   <view class="loadingImg"><image src="/lost/img/loading.gif" mode="aspectFill"></image></view>
   <view class="loadingTxt">..加载中..</view>
 </view>
 
-<view class="displayNo" hidden="{{display}}">
+<view class="displayNo" hidden="{{!noMore}}">
   <image src="/lost/img/Noline.png" mode="widthFix"></image>
 </view>
 
+<navigator url="add?accessToken={{accessToken}}" class="homeView contentCenter" hidden="{{!showMenu}}" style="bottom: 280rpx;">
+  <image class="home" src="/lost/img/add.svg"></image>
+</navigator>
+<navigator url="user?accessToken={{accessToken}}" class="homeView contentCenter" hidden="{{!showMenu}}" style="bottom: 180rpx;">
+  <image class="home" src="/lost/img/user.svg"></image>
+</navigator>
+
+<!--圆形点击框  -->
+<view class="round-click" hidden="{{showMenu}}" bindtap="menuSwitch" >
+   <view>快捷菜单</view>
+</view>
+<view class="homeView contentCenter" hidden="{{!showMenu}}" style="bottom: 80rpx;background-color:red;" bindtap="menuSwitch" >
+  <image class="home" src="/lost/img/close.svg"></image>
 </view>

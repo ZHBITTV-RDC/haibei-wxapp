@@ -1,0 +1,22 @@
+<view class="itemList">
+  <navigator url="view?id={{item.id}}" wx:key="index" class="item" wx:for="{{list}}">
+    <view class="imgView">
+      <image src="{{item.photo}}" wx:if="{{item.photo}}" class="img"></image>
+      <image src="cloud://haibei-wxapp-spxdn.6861-haibei-wxapp-spxdn/xwqs.png" wx:if="{{!item.photo&&item.type==1}}" class="img"></image>
+      <image src="cloud://haibei-wxapp-spxdn.6861-haibei-wxapp-spxdn/swzl.png" wx:if="{{!item.photo&&item.type==2}}" class="img"></image>
+    </view>
+    <view class="title">
+      {{item.title}}
+    </view>
+    <view class="author">
+      <view class="avatarView verticalCenter">
+        <image class="avatar" src="{{item.headimgurl}}"></image>
+      </view>
+      <view class="nickname verticalCenter">{{item.nickname}}</view>
+      <view class="time verticalCenter">{{item.datetime}}</view>
+    </view>
+  </navigator>
+</view>
+<view class="displayNo" hidden="{{!noMore}}">
+  <image src="/lost/img/Noline.png" mode="widthFix"></image>
+</view>

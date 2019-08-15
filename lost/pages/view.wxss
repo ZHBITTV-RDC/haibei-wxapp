@@ -17,7 +17,7 @@
   flex: 4;
   width: 80rpx; height: 80rpx; flex-direction:row;
 }
-.UserName .UserPic image{width: 72rpx; height: 72rpx; border-radius: 50%; border: 2rpx #e3e3e3 solid; padding: 2rpx; background: #fff}
+.UserName .UserPic image{width: 72rpx; height: 72rpx; border-radius: 50%; border: 2rpx #e3e3e3 solid; background: #fff}
 .UserName .UserPic text{
   width: 300rpx; 
   height: 80rpx; 
@@ -42,12 +42,13 @@
 }
 .mbTxing text{ width: 100%; display: block }
 
-.content-a{ width: 100%; margin-bottom: 20rpx;  font-size: 16px}
+.content-a{ width: 100%; margin-bottom: 20rpx;  font-size: 20px;}
 .content-b{ width: 100%; text-align: center}
-.content-tel{border-bottom: 2rpx #F5F5F5 solid; width: 100%; padding-bottom: 25rpx; color: #999; margin-bottom: 40rpx; }
+.content-c{ width: 100%; margin-bottom: 20rpx;  font-size: 16px; color: gray;}
+.content-tel{ padding-bottom: 25rpx; color: #999; }
 .content-tel image{ width: 10px;}
 .content-tel text{ padding-left: 20rpx}
-
+.bottom {border-bottom: 2rpx #F5F5F5 solid; width: 100%;}
 .line{ width: 100%; background-color: #EEEDF2; height: 10px}
 .pinglun{
   width: 100%; display: block; margin-top: 10rpx
@@ -134,4 +135,58 @@ image.mapIco{
 .zhuan button{ border-radius: 50px; background: #fff; font-size: 15px; color:#999; border: 2rpx #F4F4F4 solid;}
 .zhuan button::after {
   border: 0; 
+}
+
+
+.shareView{
+  width: 100%;
+  height: 400rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 1001;
+}
+.closeBtn{
+  width: 100%;
+  height: 86rpx;
+  background: #fafafa;
+  text-align: center;
+  font-size: 26rpx;
+  line-height: 86rpx;
+  color: #999;
+}
+.shareChoose{
+  height: 180rpx;
+  padding: 74rpx 120rpx 60rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.shareWechat,.shareWechat {
+  width: 160rpx;
+  text-align: center;
+}
+.textExplain {
+  font-size: 26rpx;
+  color: #666;
+}
+.shareChoose image {
+  width: 156rpx;
+  height: 148rpx;
+}
+
+button:after {
+  display: none;
+}
+.page-shade {
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
 }
