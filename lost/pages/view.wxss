@@ -132,7 +132,7 @@ image.mapIco{
 
 /* 转发按钮 */
 .zhuan{ width: 90%; padding:3% 5%;  background: #FAFAFA;}
-.zhuan button{ border-radius: 50px; background: #fff; font-size: 15px; color:#999; border: 2rpx #F4F4F4 solid;}
+.zhuan button{ border-radius: 50px; background: #fe6266; font-size: 15px; color:white; border: 2rpx #F4F4F4 solid;}
 .zhuan button::after {
   border: 0; 
 }

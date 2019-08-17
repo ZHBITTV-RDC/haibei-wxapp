@@ -198,8 +198,8 @@ Page({
     var that = this
     if(e.scene){
       var scene = decodeURIComponent(e.scene)
-      let f = scene.split("&")[0];
-      let id = scene.split('&')[1];
+      let f = scene.split(".")[0];
+      let id = scene.split('.')[1];
       let initOption={f:f,id:id}
       this.setData({
         initOption: initOption

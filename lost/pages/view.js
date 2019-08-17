@@ -62,7 +62,6 @@ Page({
   },
 
   savePoster: function(qrcodePath, photoPath){
-    console.log(qrcodePath,photoPath)
     var that = this
     var context = wx.createCanvasContext('poster', this)
     var h = 0
@@ -256,7 +255,7 @@ Page({
     var that = this;
     return {
       title: '【丢失】请各位朋友帮我找一找',
-      path: '/pages/view/view?id=' + that.data.vid
+      path: '/pages/index/index2?scene=lost.' + that.data.detail.id
     }
   }
 

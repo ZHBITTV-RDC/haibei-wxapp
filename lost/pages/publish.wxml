@@ -1,5 +1,5 @@
 <view class="itemList">
-  <navigator url="view?id={{item.id}}" wx:key="index" class="item" wx:for="{{list}}">
+  <navigator url="view?id={{item.id}}&accessToken={{accessToken}}" wx:key="index" class="item" wx:for="{{list}}">
     <view class="imgView">
       <image src="{{item.photo}}" wx:if="{{item.photo}}" class="img"></image>
       <image src="cloud://haibei-wxapp-spxdn.6861-haibei-wxapp-spxdn/xwqs.png" wx:if="{{!item.photo&&item.type==1}}" class="img"></image>

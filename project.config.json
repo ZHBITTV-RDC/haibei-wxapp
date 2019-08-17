@@ -79,9 +79,9 @@
 				},
 				{
 					"id": 3,
-					"name": "参数进入",
+					"name": "失物列表页分享进入",
 					"pathName": "pages/index/index2",
-					"query": "scene=lost%261",
+					"query": "scene=lost.0",
 					"scene": null
 				},
 				{

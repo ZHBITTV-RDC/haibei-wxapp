@@ -28,8 +28,7 @@ Page({
           list[i].datetime = _this.timeHandle(list[i].datetime)
         }
         _this.setData({
-          list: list,
-          id: list[list.length - 1].id
+          list: list
         })
       },
       complete: function () {
@@ -45,7 +44,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getList()
     this.setData({
       accessToken: options.accessToken
     })
@@ -89,7 +87,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getList()
   },
 
   /**

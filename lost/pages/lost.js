@@ -174,8 +174,8 @@ Page({
     var that = this;
     var picUrl = that.data.picUrl;
     return {
-      title: '来看看大家都捡到了什么',
-      path: '/pages/index/index'
+      title: '来看看大家都捡到了什么[北理珠]',
+      path: '/pages/index/index2?scene=lost.0'
     }
   },
   timeHandle: function (time) {  //时间处理
