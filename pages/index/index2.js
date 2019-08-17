@@ -143,7 +143,6 @@ Page({
           registerInfo: res.data.registerInfo,
           openNewStudentRegister: res.data.openNewStudentRegister
         })
-    
         if (res.data.hasBind == 1) {
           that.setData({
             hasBind: true,
@@ -156,6 +155,16 @@ Page({
         }else{
           if (res.data.openNewStudentRegister){
             that.checkNewStudentBind()
+          }
+        }
+        if(that.data.initOption){
+          if (that.data.initOption.f == "lost"){
+            wx.navigateTo({
+              url: '/lost/pages/lost?id=' + that.data.initOption.id + "&accessToken=" + res.data.accessToken,
+            })
+            that.setData({
+              initOption: null
+            })
           }
         }
       },
@@ -185,8 +194,17 @@ Page({
       }
     })
   },
-  onLoad: function () {
+  onLoad: function (e) {
     var that = this
+    if(e.scene){
+      var scene = decodeURIComponent(e.scene)
+      let f = scene.split(".")[0];
+      let id = scene.split('.')[1];
+      let initOption={f:f,id:id}
+      this.setData({
+        initOption: initOption
+      })
+    }
     wx.showLoading({
       title: '登录小程序中',
     })
@@ -544,7 +562,7 @@ Page({
       return
     }
     wx.navigateTo({
-      url: './' + e.currentTarget.dataset.function + '?accessToken=' + that.data.accessToken,
+      url: './' + e.currentTarget.dataset.function + '?id=0&accessToken=' + that.data.accessToken,
     })
   },
   onShareAppMessage: function () {

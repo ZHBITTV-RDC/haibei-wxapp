@@ -1,9 +1,7 @@
 {
-  "usingComponents": {
-
-  },
+  "usingComponents": {},
   "navigationBarTitleText": "失物招领",
   "navigationBarBackgroundColor": "#2da0fd",
   "navigationBarTextStyle": "white",
-  "enablePullDownRefresh": true
+  "disableScroll": true
 }

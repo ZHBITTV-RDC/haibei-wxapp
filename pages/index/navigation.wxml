@@ -22,7 +22,7 @@
   <block wx:for="{{navi[currentIndex].list}}" wx:key="index" wx:for-item="item">
     <view class="item" bindtap="showLocation" id="{{item.id}}" data-longitude="{{item.longitude}}" data-latitude="{{item.latitude}}">
       <view class="itemLeft contentCenter">
-        <image class="pic" src="{{item.img}}"></image>
+        <image class="pic" src="{{item.img?item.img:'cloud://haibei-wxapp-spxdn.6861-haibei-wxapp-spxdn/noPhoto.svg'}}" lazy-load="true"></image>
       </view>
       <view class="itemMiddle verticalCenter">
         {{item.title}}

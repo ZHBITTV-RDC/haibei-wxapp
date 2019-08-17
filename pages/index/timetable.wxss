@@ -108,7 +108,7 @@ page{
 }
 
 .bg1{
-  background-color: #CCFC26;
+  background-color: rgb(0, 236, 253);
 }
 .bg2{
   background-color: #82a6f5;
@@ -133,6 +133,12 @@ page{
 }
 .bg9{
   background-color: rgb(250, 156, 208);
+}
+.bg10{
+  background-color: rgb(156, 158, 250);
+}
+.bg11{
+  background-color: rgb(255, 178, 78);
 }
 
 .shadow{
