@@ -241,7 +241,7 @@
       校园导航
     </view>
   </view>
-  <view class='functionItemView' bindtap='openFunction' data-needbind='true' data-function='../../lost/pages/lost'>
+  <view class='functionItemView' bindtap='openFunction' data-needbind='false' data-function='../../lost/pages/lost'>
     <view class='functionIconView'>
       <image src='../../img/lost.svg' class='functionIcon'></image>
     </view>
