@@ -143,15 +143,17 @@ Page({
           registerInfo: res.data.registerInfo,
           openNewStudentRegister: res.data.openNewStudentRegister
         })
-        if (res.data.hasBind == 1) {
+        if (res.data.hasBind == 1) {  //判断是否已经绑定了小程序
           that.setData({
             hasBind: true,
             classData: res.data.classData,
           })
-          that.getHwInfo()
-          that.getTimetable()
-          that.getInformation()
-          //that.getJwNoticeDetail()
+          if(res.data.registerInfo.remain<0){  //判断是否已经开学，如果是则查询课表等信息
+            that.getHwInfo()
+            that.getTimetable()
+            that.getInformation()
+            //that.getJwNoticeDetail()
+          }
         }else{
           if (res.data.openNewStudentRegister){
             that.checkNewStudentBind()
