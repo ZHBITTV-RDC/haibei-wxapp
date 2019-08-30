@@ -23,7 +23,7 @@
         <input class='StudentIdInput' bindinput='idHandle' placeholder='学号'></input>
       </view>
       <view class='StudentPasswordInputView'>
-        <input class='StudentPasswordInput' bindinput='pwdHandle' password='true' placeholder='教务系统密码'></input>
+        <input class='StudentPasswordInput' bindinput='pwdHandle' password='true' placeholder='{{passwordHolder}}'></input>
       </view>
       <view class='bindButtonView'>
         <view class='bindButton' bindtap='bindStudent'>绑定</view>

@@ -23,7 +23,8 @@ Page({
     unReadList: [],
     unReadTitle: "",
     unReadTime: "",
-    isShowDetail: false
+    isShowDetail: false,
+    passwordHolder: "教务系统密码"
   },
 
   showDetail: function (e) {
@@ -45,8 +46,15 @@ Page({
     })
   },
   idHandle: function(e){
+    var passwordHolder = ""
+    if(e.detail.value.substring(0,2) == "19"){
+      passwordHolder = "教务系统密码(初始身份证后六位)"
+    }else{
+      passwordHolder = "教务系统密码"
+    }
     this.setData({
-      jwid: e.detail.value
+      jwid: e.detail.value,
+      passwordHolder: passwordHolder
     })
   },
   pwdHandle: function (e) {
@@ -509,11 +517,13 @@ Page({
           that.setData({
             hasBind: true,
             classData: res.data.classData,
+            registerInfo: res.data.registerInfo
           })
-          that.getHwInfo()
-          that.getTimetable()
-          that.getInformation()
-
+          if(that.data.registerInfo.remain<0){
+            that.getHwInfo()
+            that.getTimetable()
+            that.getInformation()
+          }
         }else{
           wx.showModal({
             title: '绑定失败',
