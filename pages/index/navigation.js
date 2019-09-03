@@ -109,9 +109,15 @@ Page({
   },
 
   showNavigation: function(e){
-    wx.navigateTo({
-      url: 'naviTencent?longitude=' + e.currentTarget.dataset.longitude + "&latitude=" + e.currentTarget.dataset.latitude + "&title=" + e.currentTarget.dataset.title
+    wx.openLocation({
+      latitude: parseFloat(e.currentTarget.dataset.latitude),
+      longitude: parseFloat(e.currentTarget.dataset.longitude),
+      name: e.currentTarget.dataset.title,
+      address: "北京理工大学珠海学院-" + e.currentTarget.dataset.title
     })
+    // wx.navigateTo({
+    //   url: 'naviTencent?longitude=' + e.currentTarget.dataset.longitude + "&latitude=" + e.currentTarget.dataset.latitude + "&title=" + e.currentTarget.dataset.title
+    // })
   },
 
   /**

@@ -14,7 +14,6 @@
     "pages/index/web",
     "pages/index/card",
     "pages/index/navigation",
-    "pages/index/naviTencent",
     "pages/index/credit"
   ],
   "subpackages": [
@@ -55,12 +54,6 @@
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于发布失物招领信息"
-    }
-  },
-  "plugins": {
-    "myPlugin": {
-      "version": "1.0.6",
-      "provider": "wx5bc2ac602a747594"
     }
   }
 }

@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "map-route": "plugin://myPlugin/mapRoute"
-  },
-  "navigationBarTitleText": "校园导航",
-  "navigationBarBackgroundColor": "#2da0fd",
-  "navigationBarTextStyle": "white"
-}
