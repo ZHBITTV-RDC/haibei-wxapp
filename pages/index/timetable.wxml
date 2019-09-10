@@ -11,7 +11,7 @@
       <view class='settingItem' style='margin-top:10rpx;'>选择周次:{{weekList[weekIndex].value}}</view>
   </picker>
 </view>
-<scroll-view scroll-x scroll-y>
+<scroll-view scroll-x scroll-y style="height:100%;">
   <view class='titleView'>
     <view class='title' style='margin-left:30rpx;'>周一</view>
     <view class='title'>周二</view>
