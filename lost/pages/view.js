@@ -257,6 +257,48 @@ Page({
       title: '【丢失】请各位朋友帮我找一找',
       path: '/pages/index/index2?scene=lost.' + that.data.detail.id
     }
-  }
+  },
 
+  deleteLost: function (res){
+    var that = this
+    wx.showModal({
+      title: '提示',
+      content: '你确定要删除该条失物信息吗？',
+      confirmColor: "red",
+      success: res=>{
+        if(res.confirm){
+          wx.request({
+            url: getApp().globalData.requestUrl + 'api.php',
+            data: {
+              id: that.data.detail.id,
+              method: 'deleteLost',
+              accessToken: that.data.accessToken
+            },
+            method: 'POST',
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            success: res=>{
+              if(res.data.status){
+                wx.showModal({
+                  title: '删除成功',
+                  content: '失物记录删除成功',
+                  showCancel: false,
+                  success: res=>{
+                    wx.navigateBack()
+                  }
+                })
+              }else{
+                wx.showModal({
+                  title: '删除失败',
+                  content: '失物记录删除失败，请重试',
+                  showCancel: false
+                })
+              }
+            }
+          })
+        }
+      }
+    })
+  }
 })

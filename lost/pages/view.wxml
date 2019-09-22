@@ -41,6 +41,7 @@
   </view>
   <view class='zhuan'>
     <button bindtap="showBtn">让大家帮忙找一找</button>
+    <button bindtap="deleteLost" style="margin-top:10rpx;" wx:if="{{detail.isPublisher}}">删除</button>
   </view>
   <!-- 海报 -->
   <view style="position: fixed;left: -500px; bottom: -500px;">
