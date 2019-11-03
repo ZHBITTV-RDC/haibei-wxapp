@@ -26,10 +26,19 @@
   </view>
     <view class='classTable' wx:for='{{courseList}}' wx:for-item='dayItem' wx:key='index'>
       <block wx:for='{{dayItem}}' wx:key='index1' wx:for-index='index1'  wx:for-item='courseItem'>
+          <block wx:if='{{courseItem.courseTime.length==5}}'>
+            <view class='classItem classItemL1 bg{{courseItem.color}}' data-courseName='{{courseItem.courseName}}' data-teacherName='{{courseItem.teacherName}}' data-courseWeek='{{courseItem.courseWeek}}' data-courseTime='{{courseItem.courseTime}}' data-courseLocation='{{courseItem.courseLocation}}' bindtap='showDetail'>
+              <view class='courseName'>{{courseItem.courseName}}</view>
+              <view class='courseLocation'>{{courseItem.courseLocation}}</view>
+            </view>
+            <view class='classItem classItemL1'></view>
+          </block>
+
           <view class='classItem classItemL2 bg{{courseItem.color}}' wx:if='{{courseItem.courseTime.length==8}}' data-courseName='{{courseItem.courseName}}' data-teacherName='{{courseItem.teacherName}}' data-courseWeek='{{courseItem.courseWeek}}' data-courseTime='{{courseItem.courseTime}}' data-courseLocation='{{courseItem.courseLocation}}' bindtap='showDetail'>
             <view class='courseName'>{{courseItem.courseName}}</view>
             <view class='courseLocation'>{{courseItem.courseLocation}}</view>
           </view>
+          
           <block  wx:if='{{courseItem.courseTime.length==11 && courseItem.courseName != dayItem[index1-1].courseName}}'>
             <view class='classItem classItemL3 bg{{courseItem.color}}' data-courseName='{{courseItem.courseName}}' data-teacherName='{{courseItem.teacherName}}' data-courseWeek='{{courseItem.courseWeek}}' data-courseTime='{{courseItem.courseTime}}' data-courseLocation='{{courseItem.courseLocation}}' bindtap='showDetail'>
               <view class='courseName'>{{courseItem.courseName}}</view>

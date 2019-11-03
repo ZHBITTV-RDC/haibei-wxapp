@@ -90,6 +90,7 @@ page{
 .classItemL1{
   height: 99rpx;
   border-bottom: solid gainsboro 1rpx;
+  border-radius: 5px;
 }
 .classItemL2{
   height: 199rpx;

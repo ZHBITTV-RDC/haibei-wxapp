@@ -129,6 +129,8 @@ var sliceStr = function (str){
     return str.slice(1, 3) + '-' + str.slice(7, 9) + '节'
   } else if (str.length == 14) {
     return str.slice(1, 3) + '-' + str.slice(10, 12) + '节'
+  } else if (str.length == 5) {
+    return str.slice(1, 3) + '-' + str.slice(1, 3) + '节'
   }
 }
 
@@ -140,6 +142,8 @@ var sliceStr2 = function (str) {
     return { start: str.slice(1, 3), end: str.slice(7, 9) }
   } else if (str.length == 14) {
     return { start: str.slice(1, 3), end: str.slice(10, 12) }
+  } else if (str.length == 5) {
+    return { start: str.slice(1, 3), end: str.slice(1, 3) }
   }
 }
 
