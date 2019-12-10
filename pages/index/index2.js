@@ -145,6 +145,20 @@ Page({
           })
           return
         }
+        if (res.data.status == 5) {
+          wx.showModal({
+            title: '小程序登录失败',
+            content: '因教务系统登录策略修改，此小程序已无法正常使用\n\n点击确定按钮即可使用新的iBITZH小程序',
+            success: res=>{
+              if(res.confirm){
+                wx.navigateToMiniProgram({
+                  appId: 'wx4f0e0743c12546f6',
+                })
+              }
+            }
+          })
+          return
+        }
         that.setData({
           accessToken: res.data.accessToken,
           additionFunction: res.data.additionFunction,
@@ -176,9 +190,18 @@ Page({
               initOption: null
             })
           }
+          if (that.data.initOption.f == "oneWeekCouple") {
+            wx.navigateTo({
+              url: "/couple/pages/weekcp?accessToken=" + res.data.accessToken,
+            })
+            that.setData({
+              initOption: null
+            })
+          }
         }
       },
-      fail: function () {
+      fail: function (res) {
+        console.log(res)
         wx.showModal({
           title: '小程序登录失败',
           content: '无法连接到服务器，请稍候再试',

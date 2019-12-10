@@ -25,7 +25,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.4.0",
 	"appid": "wx893e8e85ac3bc631",
-	"projectname": "zhbit_wexiaoyuan",
+	"projectname": "PocketZhbit",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
@@ -89,6 +89,13 @@
 					"name": "详情",
 					"pathName": "lost/pages/view",
 					"query": "id=1",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "一周cp小程序码",
+					"pathName": "pages/index/index2",
+					"query": "scene=oneWeekCouple",
 					"scene": null
 				}
 			]

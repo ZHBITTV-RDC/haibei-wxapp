@@ -1,0 +1,8 @@
+<!--pages/index/weekcp.wxml-->
+<image class="cpbg" src="/couple/img/cpbg.png"></image>
+<image class="cpcp" src="/couple/img/cpcp.png"></image>
+<view class="contentCenter" style="position:relative;margin-top: -70rpx;">
+  <image src="{{subSrc}}" mode="widthFix" bindtouchstart="clickStart" bindtouchend="clickEnd" class="inform">
+    <button bindtap="toFromPage" plain="true" style="border:none;width: 36%;height:100%;position:absolute;top:0"></button>
+  </image>
+</view>

@@ -282,6 +282,14 @@
       商务合作
     </view>
   </view>
+  <view class='functionItemView' bindtap='openFunction' data-needbind='false' data-function='../../couple/pages/weekcp'>
+    <view class='functionIconView'>
+      <image src='../../img/weekcp.svg' class='functionIcon'></image>
+    </view>
+    <view class='functionNameView'>
+      一周CP
+    </view>
+  </view>
 </scroll-view>
 <view class="shadow" style='display: {{isShowDetail?"flex":"none"}}' bindtap='hideDetail'>
   <view class="courseDetail">

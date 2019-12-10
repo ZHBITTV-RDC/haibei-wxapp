@@ -38,6 +38,13 @@
       "pages": [
         "pages/index"
       ]
+    },
+    {
+      "root": "couple",
+      "pages": [
+        "pages/weekcpForm",
+        "pages/weekcp"
+      ]
     }
   ],
   "window": {
@@ -48,7 +55,8 @@
   },
   "navigateToMiniProgramAppIdList": [
     "wx0d1dba6576a9771d",
-    "wx6885acbedba59c14"
+    "wx6885acbedba59c14",
+    "wx4f0e0743c12546f6"
   ],
   "sitemapLocation": "sitemap.json",
   "permission": {
